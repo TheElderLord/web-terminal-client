@@ -36,11 +36,7 @@ export default {
                 return
             }
            
-            // if (this.book_code !== '020214501513') {
-            //     this.error = true;
-            //     return;
-            // }
-            this.setRatingCode;
+            this.stateStore.set_rating_code(this.book_code)
             this.$router.push('/rate')
 
 

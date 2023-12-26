@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { useStateStore } from '../store';
 export default {
     data() {
@@ -8,7 +9,7 @@ export default {
         }
     },
     computed: {
-
+            
     },
     setup() {
         const stateStore = useStateStore();
@@ -28,14 +29,25 @@ export default {
         delNum() {
             this.booking_code = this.booking_code.slice(0, -1);
         },
-        submit() {
+        async submit() {
            
-            if (this.booking_code !== '020214501513') {
+            if (this.booking_code.length < 5) {
                 this.error = true;
                 return;
             }
             else {
-                this.$router.push('/print');
+                const result = await axios.post(`http://localhost:3000/booking/get-book`,{
+                    bookCode:this.booking_code,
+                    local: this.getLang()
+                })
+                console.log(result)
+                if(result.data.message == 'Success'){
+                    this.$router.push('/print');
+                }
+                else{
+                    this.error = true
+                }
+                
             }
 
         },

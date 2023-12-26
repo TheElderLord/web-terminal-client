@@ -31,7 +31,10 @@ export default {
             window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
         },
         async print() {
-            const response = await axios.post(`http://localhost:3000/event-now/print`,this.resp);
+            const response = await axios.post(`http://localhost:3000/services/print`,{
+                soapBody:this.resp,
+                local: this.getLang()
+            });
             if(response.status === 200)
             this.$router.push('/print')
         },
@@ -48,11 +51,11 @@ export default {
                     iin: iin,
                     local: local
                 }
-                console.log(body);
+                // console.log(body);
 
-                const response = await axios.post(`http://localhost:3000/event-now`, body);
-
-                if (response.data.message === 'Success') {
+                const response = await axios.post(`http://localhost:3000/services/event-now`, body);
+                console.log("Response",response)
+                if (response.data.message == 'Success') {
                     this.resp = response.data.data;
                     console.log(this.resp);
                 } else {

@@ -41,7 +41,11 @@ export default {
             }
             try {
                 const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
-                if (this.IIN !== "020214501513") {
+                // if (this.IIN !== "020214501513") {
+                //     this.error = true;
+                //     return;
+                // }
+                if (this.IIN.length <12) {
                     this.error = true;
                     return;
                 }

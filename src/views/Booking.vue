@@ -20,6 +20,9 @@ export default{
         },
         goBook(){
             this.$router.push('/booking-order')
+        },
+        goBack() {
+            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
         }
     }
 }
@@ -37,6 +40,9 @@ export default{
                         {{getlang()==="kz" ? "Броньдалған билетті алу" : getlang() === "ru" ?
                     "Получить забронированный билет":"Receive the reserved ticket"}}
                     </div>
+                </div>
+                <div class="option text-white text-3xl m-5 p-5 bg-yellow-600 w-full rounded-lg flex justify-center items-center" @click="goBack()">
+                    <div class="in text-center">{{getlang()==="kz" ? "Артқа":getlang()==="ru"?"Назад":"Back"}}</div>
                 </div>
             </div>
         </div>

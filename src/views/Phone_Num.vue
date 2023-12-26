@@ -14,11 +14,12 @@ export default {
         }
     },
     computed: {
+       
+    },
+    methods: {
         setPhone() {
             this.stateStore.set_phone(this.phone_number);
         },
-    },
-    methods: {
         getLang() {
             return this.stateStore.get_lang
         },
@@ -35,7 +36,7 @@ export default {
                 return;
             }
 
-            if (this.phone_number !== '87762966052') {
+            if (this.phone_number.length < 11) {
                 this.error = true;
                 return;
             }

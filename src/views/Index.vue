@@ -1,4 +1,3 @@
-
 <script>
 import axios from 'axios'
 import { useStateStore } from '../store'
@@ -32,9 +31,13 @@ export default {
             return this.stateStore.get_lang
         },
         async getServices() {
-            console.log(branchId)
-            const response = await axios.get(`http://localhost:3000/services?branchId=${branchId}`)
-            this.services = response.data.data;
+            // console.log(branchId)
+            const response = await axios.post(`http://localhost:3000/services`,{
+                branchId:branchId, 
+                queueId:'?'
+            });
+            this.services = response.data.content;
+            console.log(this.services)
 
         },
         getFormatService(service) {
@@ -51,9 +54,10 @@ export default {
             // console.log(service)
             try {
                 if (service.maxServTime === ' ' || service.maxServTime === null || service.maxServTime === undefined) {
-                    this.setBranchId
-                    this.setQueueId(service.queueId)
+                    this.setBranchId(branchId)
+                    this.setQueueId(service.queueId[0])
                     this.$router.push('/index2')
+                    return
                 }
                 else {
 
@@ -69,7 +73,7 @@ export default {
                     // }
                     try {
                         this.setBranchId(branchId);
-                        this.setQueueId(service.queueId);
+                        this.setQueueId(service.queueId[0]);
                         this.$router.push('/ticket-info');
                     } catch (err) {
                         console.log(err)
@@ -97,7 +101,7 @@ export default {
 
             <div v-for="service in services" :key="service.id" @click="goNext(service)"
                 class="service text-white text-xl  bg-yellow-600  rounded-lg flex items-center justify-center basis-5/12 py-4 m-2">
-                <div class="text-center">{{ getFormatService(service.workName) }}</div>
+                <div class="text-center">{{ getFormatService(service.workName[0]) }}</div>
             </div>
             <div @click="goBack()"
                 class="service text-white text-xl  bg-yellow-600  rounded-lg flex items-center justify-center basis-5/12 py-4 m-2">

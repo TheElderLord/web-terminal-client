@@ -20,20 +20,20 @@ const router = createRouter({
   ] // Add your routes here
 });
 
-// onBeforeMount(() => {
-//  if (iin_req == "true" ) {
+onBeforeMount(() => {
+ if (iin_req == "true" ) {
    
-//     // Assuming you have a route named 'IIN'
-//     router.push({ name: 'iin' });
-//   }
-//   else if (phone_req == "true" ){
-//     router.push({ name: 'phone' });
-//   }
-//   else {
-//     // Assuming you have a route named 'index'
-//     router.push({ name: 'index' });
-//   }
-// });
+    // Assuming you have a route named 'IIN'
+    router.push({ name: 'iin' });
+  }
+  else if (phone_req == "true" ){
+    router.push({ name: 'phone' });
+  }
+  else {
+    // Assuming you have a route named 'index'
+    router.push({ name: 'index' });
+  }
+});
 </script>
 
 <template>

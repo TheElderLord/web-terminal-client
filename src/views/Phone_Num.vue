@@ -27,8 +27,10 @@ export default {
             if (this.phone_number.length < 11) {
                 this.phone_number += num;
             }
+            this.phone_number =  this.phone_number.replace(/[^0-9]/g, "")
         },
         delNum() {
+            this.phone_number =  this.phone_number.replace(/[^0-9]/g, "")
             this.phone_number = this.phone_number.slice(0, -1);
         },
         submit() {
@@ -61,7 +63,8 @@ export default {
 
     },
     mounted() {
-        document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => {
+        try {
             switch (e.key) {
                 case "Backspace":
                     this.delNum();
@@ -69,23 +72,15 @@ export default {
                 case "Enter":
                     this.submit();
                     break;
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                case "0":
-                    this.addNum(parseInt(e.key));
-                    break;
-                    
+                default:
+                this.phone_number =  this.phone_number.replace(/[^0-9]/g, "")
             }
-        });
+        } catch (err) {
+            console.log(err);
+        }
+    });
+}
 
-    }
 }
 </script>
 <template>
@@ -97,7 +92,7 @@ export default {
                 <h1 class="text-white text-2xl m-3">{{getLang()==="kz"? "Телефон номерін енгізіңіз"
                     : getLang()==="ru" ? "Введите номер телефона":"Enter the phone number"}}</h1>
                 <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center"
-                    v-model="phone_number">
+                    v-model="phone_number" maxlength="10">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-4">{{getLang()==="kz"? "Дурыс емес телефон номері"
                     : getLang()==="ru" ? "Неправильный номер телефона": "Invalid phone number" }}</div>
             </div>

@@ -27,9 +27,11 @@ export default {
             if (this.booking_code.length < 12) {
                 this.booking_code += num;
             }
+            this.booking_code =  this.booking_code.replace(/[^0-9]/g, "")
         },
         delNum() {
             this.booking_code = this.booking_code.slice(0, -1);
+            this.booking_code =  this.booking_code.replace(/[^0-9]/g, "")
         },
         async submit() {
            
@@ -75,6 +77,8 @@ export default {
                 case 'Enter':
                     this.submit();
                     break;
+                default:
+                this.booking_code =  this.booking_code.replace(/[^0-9]/g, "")
             }
         });
     }

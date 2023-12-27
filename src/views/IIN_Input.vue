@@ -29,10 +29,13 @@ export default {
         addNum(num) {
             if (this.IIN.length < 12) {
                 this.IIN += num;
+               
             }
+            
         },
         delNum() {
             this.IIN = this.IIN.slice(0, -1);
+            this.IIN =  this.IIN.replace(/[^0-9]/g, "")
         },
         submit() {
             if (this.error) {
@@ -53,7 +56,7 @@ export default {
                 // console.log(phone_req === "true")
 
                 this.setIIN;
-                if (phone_req === "true") {
+                if (phone_req == "true") {
                     this.$router.push('/phone');
                 } else {
                     
@@ -82,23 +85,24 @@ export default {
 
     },
     mounted() {
-
-        document.addEventListener('keydown', (e) => {
-            try {
-                switch (e) {
-                    case "Backspace":
-                        this.delNum();
-                        break;
-                    case "Enter":
-                        this.submit();
-                        break;
-                }
-            } catch (err) {
-                console.log(err)
+    document.addEventListener('keydown', (e) => {
+        try {
+            switch (e.key) {
+                case "Backspace":
+                    this.delNum();
+                    break;
+                case "Enter":
+                    this.submit();
+                    break;
+                default: 
+                this.IIN =  this.IIN.replace(/[^0-9]/g, "")
             }
-        });
+        } catch (err) {
+            console.log(err);
+        }
+    });
+}
 
-    }
 }
 </script>
 <template>
@@ -110,7 +114,7 @@ export default {
 
                 <h1 class="text-white text-2xl m-3">{{ getLang() === "kz" ? "ЖСН енгізіңіз" : getLang() === "ru"
                     ? "Введите ИИН" : "Enter the IIN" }}</h1>
-                <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="IIN">
+                <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="IIN" maxlength="12">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-2 mb-0 p-0">{{ getLang() === "kz" ? "Дұрыс емес ЖСН"
                                     : getLang() === "ru" ? "Неправильный ИИН" : "Invalid IIN" }}</div>
             </div>

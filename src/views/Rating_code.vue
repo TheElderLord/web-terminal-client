@@ -27,9 +27,11 @@ export default {
             if (this.book_code.length < 12) {
                 this.book_code += num;
             }
+            this.book_code =  this.book_code.replace(/[^0-9]/g, "")
         },
         delNum() {
             this.book_code = this.book_code.slice(0, -1);
+            this.book_code =  this.book_code.replace(/[^0-9]/g, "");
         },
         submit() {
             if(this.error){
@@ -51,6 +53,7 @@ export default {
         },
         goBack() {
             window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+
         }
     
 
@@ -65,11 +68,8 @@ export default {
                     this.submit();
                     break;
                 default:
-                    if (!isNaN(parseInt(e))) {
-                        const num = parseInt(e);
-                        this.addNum(num);
-                    }
-                break;
+                this.book_code =  this.book_code.replace(/[^0-9]/g, "")
+               
             }
         });
     }

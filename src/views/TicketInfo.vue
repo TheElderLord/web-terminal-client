@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useStateStore } from '../store'
 import { SERVER_HOST } from '../constants';
 import {SERVER_PORT} from '../constants';
+const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED;
+const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
 export default {
     data() {
         return {
@@ -28,8 +30,15 @@ export default {
         getiin() {
             return this.stateStore.get_iin
         },
-        goBack() {
-            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+        getStart(){
+            if(iin_req === "true"){
+                this.$router.push('/iin')
+            }
+            else if(phone_req === "true"){
+                this.$router.push('/phone')
+            }
+            else
+            this.$router.push('/')
         },
         async print() {
             const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`,{
@@ -72,6 +81,9 @@ export default {
     },
     mounted() {
         this.sendEvent();
+        setTimeout(()=>{
+            this.getStart()
+        },10000);
     },
 
 }
@@ -91,9 +103,9 @@ export default {
         </div>
         <div class="buttons w-2/5 mx-auto mt-8">
             <div class="button text-white text-3xl bg-yellow-600 my-4 py-5 rounded-lg" @click="print()">
-                 {{getLang()==="kz"?"Басып шығару":getLang()==="ru"?"Распачатать": "Print"}}</div>
-            <div class="button text-white text-3xl bg-yellow-600 my-4 py-5 rounded-lg" @click="goBack()">
-                {{ getLang()==="kz"?"Артқа":getLang()==="ru"?"Назад":"Back" }}    
+                 {{getLang()==="kz"?"Басып шығару":getLang()==="ru"?"Распечатать": "Print"}}</div>
+            <div class="button text-white text-3xl bg-yellow-600 my-4 py-5 rounded-lg" @click="getStart()">
+                {{ getLang()==="kz"?"Басты бетке":getLang()==="ru"?"На главную":"To main page" }}    
             </div>
         </div>
     </div>

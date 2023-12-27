@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useStateStore } from '../store';
 import { SERVER_HOST } from '../constants';
 import {SERVER_PORT} from '../constants';
+const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED;
+const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
 export default {
     name:"rate-page",
     data() {
@@ -33,18 +35,25 @@ export default {
         },
 
         goBack() {
-            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+            if(iin_req === "true"){
+                this.$router.push('/iin')
+            }
+            else if(phone_req === "true"){
+                this.$router.push('/phone')
+            }
+            else
+            this.$router.push('/')
         },
         selectRate(value) {
            
             this.rating = value;
         },
        
-        async submit(){
+        async submit(mark){
             
             const orderNum = this.getRatingCode();
             console.log(orderNum)
-            const mark = this.rating;
+            // const mark = this.rating;
             const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/rate`,{
                 orderNum:orderNum,
                 rating:mark,
@@ -53,8 +62,8 @@ export default {
             this.rated = true;
 
             setTimeout(()=>{
-                this.$router.push('/')
-            },2000)
+                this.goBack()
+            },3000)
             
         }
 
@@ -62,6 +71,9 @@ export default {
     },
     mounted() {
         console.log(this.getRatingCode())
+        setTimeout(()=>{
+            this.goBack()
+        },30000);
     }
 
 }
@@ -73,20 +85,20 @@ export default {
                 :getLang()==="ru"?"Спасибо за оценку":"Thank you for evaluation"}}</p>
         </div>
         <div class="rates text-center p-3 m-4 w-8/12 mx-auto bg-white bg-opacity-20 rounded-lg sm:w-10/12">
-            <div class="rate text-white bg-green-700 py-7 my-5 rounded-xl text-xl text font-bold" :class="{selected :rating===5}" @click="selectRate(5)">
+            <div class="rate text-white bg-green-700 py-7 my-5 rounded-xl text-xl text font-bold" :class="{selected :rating===5}" @click="submit(5)">
                 {{getLang()==="kz" ? "Өте жақсы" : getLang()==="ru"?"Отлично": "Perfect"
             }}</div>
-            <div class="rate text-white bg-yellow-400 py-7 my-5 rounded-xl text-xl font-bold" :class="{selected :rating===4}" @click="selectRate(4)">
+            <div class="rate text-white bg-yellow-400 py-7 my-5 rounded-xl text-xl font-bold" :class="{selected :rating===4}" @click="submit(4)">
                 {{ getLang() === "kz" ? "Жақсы" : getLang() === "ru"?"Удовлетворительно":"Good" }}    
             </div>
-            <div class="rate text-white bg-red-700 py-7 my-5 rounded-xl text-xl font-bold" :class="{selected :rating===2}" @click="selectRate(2)">
+            <div class="rate text-white bg-red-700 py-7 my-5 rounded-xl text-xl font-bold" :class="{selected :rating===2}" @click="submit(2)">
                 {{ getLang()==="kz"?"Жаман":getLang()==="ru"?"Плохо":"Bad" }}
             </div>
-            <div class="rate text-white bg-yellow-600 py-5 mt-14 mx-auto  rounded-xl text-xl font-bold" @click="submit()">
+            <!-- <div class="rate text-white bg-yellow-600 py-5 mt-14 mx-auto  rounded-xl text-xl font-bold" @click="submit()">
                 {{ getLang() === "kz"?"Растау":getLang()==="ru"?"Подтвердить":"Submit" }}
-            </div>
-            <div class="rate text-white bg-yellow-600 py-5 mt-5 mx-auto  rounded-xl text-xl font-bold" @click="goBack()">
-                {{ getLang()==="kz"?"Артқа":getLang()==="ru"?"Назад":"Back" }}
+            </div> -->
+            <div class="rate text-white bg-yellow-600 py-5 mx-auto  rounded-xl text-xl font-bold mt-15" @click="goBack()">
+                {{ getLang()==="kz"?"Басты бет":getLang()==="ru"?"На главную":"To main page" }}
             </div>
         </div>
         

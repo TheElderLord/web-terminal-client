@@ -1,7 +1,8 @@
 <script>
 import axios from 'axios'
 import { useStateStore } from '../store'
-
+import { SERVER_HOST } from '../constants';
+import {SERVER_PORT} from '../constants';
 export default {
     data() {
         return {
@@ -31,7 +32,7 @@ export default {
             window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
         },
         async print() {
-            const response = await axios.post(`http://localhost:3000/services/print`,{
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`,{
                 soapBody:this.resp,
                 local: this.getLang()
             });
@@ -53,7 +54,7 @@ export default {
                 }
                 // console.log(body);
 
-                const response = await axios.post(`http://localhost:3000/services/event-now`, body);
+                const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/event-now`, body);
                 console.log("Response",response)
                 if (response.data.message == 'Success') {
                     this.resp = response.data.data;

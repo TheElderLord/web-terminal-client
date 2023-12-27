@@ -1,10 +1,11 @@
-<script>
+<script >
 import axios from 'axios'
 import { useStateStore } from '../store'
-const branchId = import.meta.env.VITE_SERVER_BRANCH_ID;
+import {BRANCH_ID} from '../constants';
+import { SERVER_HOST } from '../constants';
+import {SERVER_PORT} from '../constants';
 export default {
-
-
+    name:"index-page",
     data() {
         return {
             services: ''
@@ -32,8 +33,8 @@ export default {
         },
         async getServices() {
             // console.log(branchId)
-            const response = await axios.post(`http://localhost:3000/services`,{
-                branchId:branchId, 
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`,{
+                branchId:BRANCH_ID, 
                 queueId:'?'
             });
             this.services = response.data.content;
@@ -54,7 +55,7 @@ export default {
             // console.log(service)
             try {
                 if (service.maxServTime === ' ' || service.maxServTime === null || service.maxServTime === undefined) {
-                    this.setBranchId(branchId)
+                    this.setBranchId(BRANCH_ID)
                     this.setQueueId(service.queueId[0])
                     this.$router.push('/index2')
                     return
@@ -72,7 +73,7 @@ export default {
                     //     // this.$router.push('/print')
                     // }
                     try {
-                        this.setBranchId(branchId);
+                        this.setBranchId(BRANCH_ID);
                         this.setQueueId(service.queueId[0]);
                         this.$router.push('/ticket-info');
                     } catch (err) {

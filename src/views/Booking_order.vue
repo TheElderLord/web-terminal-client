@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
 import { useStateStore } from '../store';
+import { SERVER_HOST } from '../constants';
+import {SERVER_PORT} from '../constants';
 export default {
     data() {
         return {
@@ -36,7 +38,7 @@ export default {
                 return;
             }
             else {
-                const result = await axios.post(`http://localhost:3000/booking/get-book`,{
+                const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/get-book`,{
                     bookCode:this.booking_code,
                     local: this.getLang()
                 })

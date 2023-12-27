@@ -1,8 +1,10 @@
 <script>
 import axios from 'axios';
 import { useStateStore } from '../store';
-
+import { SERVER_HOST } from '../constants';
+import {SERVER_PORT} from '../constants';
 export default {
+    name:"rate-page",
     data() {
         return {
             rating: 0,
@@ -43,11 +45,11 @@ export default {
             const orderNum = this.getRatingCode();
             console.log(orderNum)
             const mark = this.rating;
-            const result = await axios.post(`http://localhost:3000/rate`,{
+            const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/rate`,{
                 orderNum:orderNum,
                 rating:mark,
             })
-            // console.log(result.json());
+            console.log(result);
             this.rated = true;
 
             setTimeout(()=>{
@@ -64,7 +66,6 @@ export default {
 
 }
 </script>
-
 <template>
     <div class="md:container mx-auto justify-center items-center p-5 ">
         <div v-if="rated" class="container mx-auto text-center text-white text-3xl m-2 font-bold">

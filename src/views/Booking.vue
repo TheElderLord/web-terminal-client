@@ -1,7 +1,7 @@
 <script>
-
 import { useStateStore } from '../store';
 export default{
+    name:"Booking-page",
     data(){
         return {}
     },

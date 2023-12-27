@@ -81,12 +81,7 @@ export default {
                 case "0":
                     this.addNum(parseInt(e.key));
                     break;
-                default:
-                    const val = parseInt(e.key);
-                    if (isNaN(val)) {
-                        this.phone_number = this.phone_number.slice(0, -1);
-                        return;
-                    }
+                    
             }
         });
 

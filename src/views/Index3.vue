@@ -1,11 +1,11 @@
-
 <script>
 import axios from 'axios'
 import { useStateStore } from '../store'
-const branchId = import.meta.env.VITE_SERVER_BRANCH_ID;
+import {BRANCH_ID} from '../constants';
+import { SERVER_HOST } from '../constants';
+import {SERVER_PORT} from '../constants';
 export default {
-
-
+    name:"index2-page",
     data() {
         return {
             services: ''
@@ -18,24 +18,30 @@ export default {
         }
     },
     computed: {
-        setBranchId() {
+
+
+    },
+    methods: {
+        setBranchId(branchId) {
             this.stateStore.set_branch(branchId);
         },
         setQueueId(id) {
             this.stateStore.set_queueId(id);
         },
-        get_iin() {
-            this.stateStore.get_iin
-        }
-    },
-    methods: {
         getLang() {
             return this.stateStore.get_lang
         },
+        getQueueId(){
+            return this.stateStore.get_queueId
+        },
         async getServices() {
-            console.log(branchId)
-            const response = await axios.get(`http://localhost:3000/services?branchId=${branchId}`)
-            this.services = response.data.data;
+            // console.log(branchId)
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`,{
+                branchId:BRANCH_ID, 
+                queueId:this.getQueueId()
+            });
+            this.services = response.data.content;
+            console.log(this.services)
 
         },
         getFormatService(service) {
@@ -52,20 +58,29 @@ export default {
             // console.log(service)
             try {
                 if (service.maxServTime === ' ' || service.maxServTime === null || service.maxServTime === undefined) {
-                    this.setBranchId
-                    this.setQueueId(service.queueId)
+                    this.setBranchId(BRANCH_ID)
+                    this.setQueueId(service.queueId[0])
                     this.$router.push('/index4')
+                    return
                 }
                 else {
-                    
-                    const response = await axios.post(`http://localhost:3000/event-now`, {
-                        branchId: branchId,
-                        queueId: service.queueId,
-                        iin: (this.get_iin !== '' || this.get_iin !== undefined) ? this.get_iin : '?',
-                        local: this.getLang()
-                    });
-                    if (response.data.message === 'Success') {
-                        console.log('Success')
+
+                    // const response = await axios.post(`http://localhost:3000/event-now`, {
+                    //     branchId: branchId,
+                    //     queueId: service.queueId,
+                    //     iin: (this.get_iin !== '' || this.get_iin !== undefined) ? this.get_iin : '?',
+                    //     local: this.getLang()
+                    // });
+                    // if (response.data.message === 'Success') {
+                    //     console.log('Success')
+                    //     // this.$router.push('/print')
+                    // }
+                    try {
+                        this.setBranchId(BRANCH_ID);
+                        this.setQueueId(service.queueId[0]);
+                        this.$router.push('/ticket-info');
+                    } catch (err) {
+                        console.log(err)
                     }
                 }
             } catch (err) {
@@ -90,7 +105,7 @@ export default {
 
             <div v-for="service in services" :key="service.id" @click="goNext(service)"
                 class="service text-white text-xl  bg-yellow-600  rounded-lg flex items-center justify-center basis-5/12 py-4 m-2">
-                <div class="text-center">{{ getFormatService(service.workName) }}</div>
+                <div class="text-center">{{ getFormatService(service.workName[0]) }}</div>
             </div>
             <div @click="goBack()"
                 class="service text-white text-xl  bg-yellow-600  rounded-lg flex items-center justify-center basis-5/12 py-4 m-2">
@@ -107,7 +122,7 @@ export default {
     </div>
 </template>
 <style scoped>
-.service{
+.service {
     cursor: pointer;
 }
 </style>

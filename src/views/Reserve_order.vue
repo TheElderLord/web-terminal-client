@@ -3,6 +3,9 @@ import { useStateStore } from '../store';
 import axios from 'axios'
 
 const branchId = import.meta.env.VITE_SERVER_BRANCH_ID;
+
+import { SERVER_HOST } from '../constants';
+import {SERVER_PORT} from '../constants';
 export default {
     data(){
         return{
@@ -44,7 +47,7 @@ export default {
             }
         },
         async getWebServices() {
-            const response = await axios.post(`http://localhost:3000/booking/webservices`,{
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/webservices`,{
                 branchId:branchId,
                 queuId:"?"
             })
@@ -53,7 +56,7 @@ export default {
         },
         async getDays(){
            
-            const response = await axios.post(`http://localhost:3000/booking/days`,{
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/days`,{
                 branchId:branchId,
                
             })
@@ -65,7 +68,7 @@ export default {
             // console.log(now.getDate())
             const bookDay = now.getDate() == this.day.substring(0,2) ? 0 : this.day.substring(0,2);
             // console.log(bookDay)
-            const response = await axios.post(`http://localhost:3000/booking/time`,{
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/time`,{
                 branchId:branchId,
                 queueId:this.queueId,
                 day:bookDay
@@ -85,7 +88,7 @@ export default {
                 time:bookTime
             };
             console.log(reqBody)
-            const response = await axios.post(`http://localhost:3000/booking/reserve`,reqBody);
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/reserve`,reqBody);
             if(response.data == 'Failed'){
                 alert("error occured")
                 return

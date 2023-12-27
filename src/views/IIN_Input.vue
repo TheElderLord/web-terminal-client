@@ -1,6 +1,5 @@
 <script>
 import { useStateStore } from '../store';
-
 export default {
     data() {
         return {

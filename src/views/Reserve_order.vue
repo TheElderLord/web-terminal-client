@@ -68,11 +68,14 @@ export default {
             // console.log(now.getDate())
             const bookDay = now.getDate() == this.day.substring(0,2) ? 0 : this.day.substring(0,2);
             // console.log(bookDay)
-            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/time`,{
+            const body = {
                 branchId:branchId,
                 queueId:this.queueId,
                 day:bookDay
-            })
+            };
+            console.log(body);
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/time`,body)
+
             this.slots = response.data;
             console.log(this.slots)
         },

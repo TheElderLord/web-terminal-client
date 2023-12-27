@@ -49,7 +49,7 @@ export default {
 
         },
         isCorrect() {
-            if (this.phone_number.length > 0 && this.phone_number.length < 11 || this.phone_number.length > 11) {
+            if (this.phone_number.length > 0 && this.phone_number.length < 11 ) {
                 return true;
             }
             else if (this.error) {
@@ -92,7 +92,7 @@ export default {
                 <h1 class="text-white text-2xl m-3">{{getLang()==="kz"? "Телефон номерін енгізіңіз"
                     : getLang()==="ru" ? "Введите номер телефона":"Enter the phone number"}}</h1>
                 <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center"
-                    v-model="phone_number" maxlength="10">
+                    v-model="phone_number" maxlength="11">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-4">{{getLang()==="kz"? "Дурыс емес телефон номері"
                     : getLang()==="ru" ? "Неправильный номер телефона": "Invalid phone number" }}</div>
             </div>

@@ -42,8 +42,8 @@ export default {
         },
         async print() {
             const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`,{
-                soapBody:this.resp,
-                local: this.getLang()
+                local: this.getLang(),
+                soapBody:this.resp
             });
             if(response.status === 200)
             this.$router.push('/print')
@@ -67,7 +67,7 @@ export default {
                 console.log("Response",response)
                 if (response.data.message == 'Success') {
                     this.resp = response.data.data;
-                    console.log(this.resp);
+                    console.log("This resp", this.resp);
                 } else {
                     console.error('Error in API response:', response.data.message);
                 }
@@ -83,7 +83,7 @@ export default {
         this.sendEvent();
         setTimeout(()=>{
             this.getStart()
-        },10000);
+        },30000);
     },
 
 }

@@ -42,7 +42,8 @@ export default {
         },
         async print() {
             const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`,{
-                local: this.getLang(),
+                // local: this.getLang(),
+                local: "ru",
                 soapBody:this.resp
             });
             if(response.status === 200)

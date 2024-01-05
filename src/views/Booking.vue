@@ -30,7 +30,7 @@ export default{
 
 <template>
         <div class="md:container mx-auto">
-            <h1 class="text-white text-3xl">{{getlang()==="kz" ? "Броньдау":getlang()==="ru"?"Бронирование":"Reservation"}}</h1>
+            <div class=" text-white text-4xl m-5 p-5  w-full rounded-lg flex justify-center items-center">{{getlang()==="kz" ? "Броньдау":getlang()==="ru"?"Бронирование":"Reservation"}}</div>
             <div class="options mx-auto text-center p-5 mt-10 w-3/5">
                 <div class="option text-white text-3xl m-5 p-5 bg-yellow-600 w-full rounded-lg flex justify-center items-center" @click="goReserve()">
                     <div class="in text-center">{{getlang()==="kz" ? "Броньдау":getlang()==="ru"?"Бронирование":"Reservation"}}</div>

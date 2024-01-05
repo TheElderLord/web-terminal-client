@@ -101,6 +101,7 @@ export default {
             this.queueId = '';
             this.day = '';
             this.time = '';
+            this.hide = false;
             // console.log(response.data)
         },
         goMain(){

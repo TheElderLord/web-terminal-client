@@ -12,7 +12,7 @@ export default {
             services:[],
             days:[],
             slots:[],
-
+            hide:true,
 
 
             queueId:null,
@@ -60,7 +60,8 @@ export default {
                 branchId:branchId,
                
             })
-            this.days = response.data;
+            this.days.push(response.data[0]);
+            this.days.push(response.data[1]);
             // console.log(this.days)
         },
         async getTime(){
@@ -120,16 +121,17 @@ export default {
 </script>
 <template>
     <div class="md:container mx-auto">
-        <div class="form">
+        <div v-if="bookCode"  class="title text-white text-5xl text-center my-5 font-bold">
+            {{ getLang() == "kz" ? "Сіздің броньдау кодыңыз" : getLang() == "ru"?"Ваш код бронирования":"Your reserving code" }}
+           : {{ bookCode }}
+         </div>
+        <div v-if="hide" class="form">
             <div class="title text-white text-2xl text-center my-5">
                {{ getLang() == "kz" ? "Броньдау" : getLang() == "ru"?"Бронирование":"Reserving" }}
                
             </div>
 
-            <div v-if="bookCode" class="title text-white text-3xl text-center my-5 font-bold">
-                {{ getLang() == "kz" ? "Сіздің броньдау кодыңыз" : getLang() == "ru"?"Ваш код бронирования":"Your reserving code" }}
-               : {{ bookCode }}
-             </div>
+            
             
             <div class="field mx-auto ">
                 <div class="web-serv w-6/12 mx-auto my-4 py-4">
@@ -155,7 +157,7 @@ export default {
                        
                     </select>
                 </div>
-                <div class="slots w-6/12 mx-auto my-4 py-4">
+                <div  class="slots w-6/12 mx-auto my-4 py-4">
                     <label for="slots" class="text-white  text-lg">
                         {{ getLang()=="kz"?"Уақытты таңдаңыз":getLang()=="ru"?"Выберите время":"Select a time" }}
                       </label>
@@ -168,19 +170,20 @@ export default {
                 </div>
 
 
-                <div class="submit  mt-5  flex ">
-                   <button @click="reserve()" class="text-white w-fit  text-center bg-yellow-600 py-3 px-10 text-xl mx-auto rounded-lg">
-                    {{getLang() == "kz"?"Растау":getLang()=="ru"?"Подтвердить":"Submit" }}
-                   </button>   
-                </div>
-                <div class="submit  mt-5  flex ">
-                    <button @click="goMain()" class="text-white w-fit  text-center bg-yellow-600 py-3 px-10 text-xl mx-auto rounded-lg">
-                     {{getLang() == "kz"?"Басты бет":getLang()=="ru"?"Главная страница":"Main page" }}
-                    </button>
-                 </div>
+                
                
             </div>
         </div>
+        <div class="submit  mt-5  flex ">
+            <button @click="reserve()" class="text-white w-fit  text-center bg-yellow-600 py-3 px-10 text-xl mx-auto rounded-lg">
+             {{getLang() == "kz"?"Растау":getLang()=="ru"?"Подтвердить":"Submit" }}
+            </button>   
+         </div>
+         <div class="submit  mt-5  flex ">
+             <button @click="goMain()" class="text-white w-fit  text-center bg-yellow-600 py-3 px-10 text-xl mx-auto rounded-lg">
+              {{getLang() == "kz"?"Басты бет":getLang()=="ru"?"Главная страница":"Main page" }}
+             </button>
+          </div>
 
     </div>
    

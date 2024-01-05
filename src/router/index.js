@@ -20,7 +20,8 @@ import Rate from '../views/Rate.vue';
 
 
 import PrintTicket from '../views/PrintTicket.vue';
-
+const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED;
+const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
 
 
 
@@ -114,4 +115,27 @@ const router = createRouter({
   ]
 })
 
+
+let initialRouteSet = false;
+
+router.beforeEach((to, from, next) => {
+  if (!initialRouteSet) {
+    let initialRoute = 'index'; // Default route
+
+    if (iin_req === 'true') {
+      initialRoute = 'IIN';
+    } else if (phone_req === 'true') {
+      initialRoute = 'phone';
+    }
+
+    // Redirect to the initial route
+    next({ name: initialRoute });
+
+    // Unregister the navigation guard to prevent further redirections
+    initialRouteSet = true;
+  } else {
+    // Continue with the navigation
+    next();
+  }
+});
 export default router

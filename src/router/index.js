@@ -17,11 +17,12 @@ import Reserve_order from '../views/Reserve_order.vue';
 import Rating_code from '../views/Rating_code.vue';
 import Rate from '../views/Rate.vue';
 
-
+import Messages from '../views/Messages.vue'
 
 import PrintTicket from '../views/PrintTicket.vue';
 const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED;
 const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
+
 
 
 
@@ -111,6 +112,15 @@ const router = createRouter({
       props: true
 
     },
+    {
+      path: '/messages',
+      name: 'messages',
+      component: Messages,
+      props: true
+
+    },
+
+    
    
   ]
 })

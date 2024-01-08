@@ -9,6 +9,7 @@ export const useStateStore = defineStore('store', {
         lang: "kz",
         rating_code: '',
         ticket_body:'',
+        message:'Error appeared'
 
 
      }),
@@ -37,6 +38,9 @@ export const useStateStore = defineStore('store', {
         },
         get_ticket_body(state){
             return state.ticket_body;
+        },
+        get_error_message(state){
+            return state.message;
         }
 
     },
@@ -62,6 +66,9 @@ export const useStateStore = defineStore('store', {
         },
         set_ticket_body(body){
             this.ticket_body = body;
+        },
+        set_message(message){
+            this.message = message;
         }
     },
   })

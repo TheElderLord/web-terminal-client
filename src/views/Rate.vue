@@ -108,13 +108,13 @@ export default {
       >
         {{ getLang() === 'kz' ? 'Өте жақсы' : getLang() === 'ru' ? 'Отлично' : 'Perfect' }}
       </div>
-      <div
+      <!-- <div
         class="rate text-white bg-yellow-400 py-7 my-5 rounded-xl text-xl font-bold"
         :class="{ selected: rating === 4 }"
         @click="submit(4)"
       >
         {{ getLang() === 'kz' ? 'Жақсы' : getLang() === 'ru' ? 'Удовлетворительно' : 'Good' }}
-      </div>
+      </div> -->
       <div
         class="rate text-white bg-red-700 py-7 my-5 rounded-xl text-xl font-bold"
         :class="{ selected: rating === 2 }"

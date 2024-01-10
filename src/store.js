@@ -9,7 +9,8 @@ export const useStateStore = defineStore('store', {
         lang: "kz",
         rating_code: '',
         ticket_body:'',
-        message:'Error appeared'
+        message:'Error appeared',
+    
 
 
      }),
@@ -41,7 +42,8 @@ export const useStateStore = defineStore('store', {
         },
         get_error_message(state){
             return state.message;
-        }
+        },
+      
 
     },
     

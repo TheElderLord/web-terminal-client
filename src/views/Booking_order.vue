@@ -29,13 +29,16 @@ export default {
             }
             this.booking_code =  this.booking_code.replace(/[^0-9]/g, "")
         },
+        setTicketBody(body){
+            this.stateStore.set_ticket_body(body)
+        },
         delNum() {
             this.booking_code = this.booking_code.slice(0, -1);
             this.booking_code =  this.booking_code.replace(/[^0-9]/g, "")
         },
         async submit() {
            
-            if (this.booking_code.length < 5) {
+            if (this.booking_code.length == 0) {
                 this.error = true;
                 return;
             }
@@ -44,9 +47,10 @@ export default {
                     bookCode:this.booking_code,
                     local: this.getLang()
                 })
-                console.log(result)
+                console.log(result);
                 if(result.data.message == 'Success'){
-                    this.$router.push('/print');
+                    this.setTicketBody(result.data.code);
+                    this.$router.push('/ticket-info');
                 }
                 else{
                     this.error = true
@@ -90,7 +94,7 @@ export default {
 
         <div class="numpad text-center w-3/5 md:mx-auto bg-white bg-opacity-20 rounded-lg p-5">
             <div class="numpadHeader text-center m-8 ">
-                <h1 class="text-white text-4xl m-5">{{getLang()==="kz"? "Броньдау кодын енгізіңіз":getLang()==="ru"?"Введите ИИН":"Enter the IIN"}}</h1>
+                <h1 class="text-white text-4xl m-5">{{getLang()==="kz"? "Броньдау кодын енгізіңіз":getLang()==="ru"?"Введите код брони":"Enter the code"}}</h1>
                 <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="booking_code">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-4">Дурыс емес броньдау коды </div>
             </div>

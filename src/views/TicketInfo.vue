@@ -8,7 +8,7 @@ const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
 export default {
     data() {
         return {
-            resp: '',
+            resp: null,
         }
     },
     setup() {
@@ -18,18 +18,13 @@ export default {
         }
     },
     methods: {
-        getBranchId() {
-            return this.stateStore.get_branch
-        },
-        getQueueid() {
-            return this.stateStore.get_queueId;
+        getTicketBody(){
+            return this.stateStore.get_ticket_body;
         },
         getLang() {
             return this.stateStore.get_lang
         },
-        getiin() {
-            return this.stateStore.get_iin
-        },
+        
         getStart(){
             if(iin_req === "true"){
                 this.$router.push('/iin')
@@ -51,30 +46,8 @@ export default {
         },
 
         async sendEvent() {
-            try {
-                const branchId = this.getBranchId() ? this.getBranchId() : '?';
-                const queueId = this.getQueueid() ? this.getQueueid() : '?';
-                const iin = this.getiin() ? this.getiin() : '?';
-                const local = this.getLang();
-                const body = {
-                    branchId: branchId,
-                    queueId: queueId,
-                    iin: iin,
-                    local: local
-                }
-                // console.log(body);
-
-                const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/event-now`, body);
-                console.log("Response",response)
-                if (response.data.message == 'Success') {
-                    this.resp = response.data.data;
-                    console.log("This resp", this.resp);
-                } else {
-                    console.error('Error in API response:', response.data.message);
-                }
-            } catch (error) {
-                console.error('Error in API request:', error);
-            }
+           const body = this.getTicketBody();
+           this.resp = body;
         },
 
 

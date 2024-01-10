@@ -65,23 +65,36 @@ export default {
                 }
                 else {
 
-                    // const response = await axios.post(`http://localhost:3000/event-now`, {
-                    //     branchId: branchId,
-                    //     queueId: service.queueId,
-                    //     iin: (this.get_iin !== '' || this.get_iin !== undefined) ? this.get_iin : '?',
-                    //     local: this.getLang()
-                    // });
-                    // if (response.data.message === 'Success') {
-                    //     console.log('Success')
-                    //     // this.$router.push('/print')
-                    // }
+                   
                     try {
-                        this.setBranchId(BRANCH_ID);
-                        this.setQueueId(service.queueId[0]);
-                        this.$router.push('/ticket-info');
-                    } catch (err) {
-                        console.log(err)
-                    }
+                            const branchId = BRANCH_ID;
+                            const queueId = service.queueId[0];
+                            const iin = this.getiin() ? this.getiin() : '?'
+                            const local = this.getLang();
+                            const body = {
+                                branchId: branchId,
+                                queueId: queueId,
+                                iin: iin,
+                                local: local
+                            }
+                            // console.log(body);
+
+                            const response = await axios.post(
+                                `http://${SERVER_HOST}:${SERVER_PORT}/services/event-now`,
+                                body
+                            )
+                            console.log('Response', response)
+                            if (response.data.message == 'Success') {
+                                
+                                this.setTicketBody(response.data.data)
+                                this.$router.push('/ticket-info')
+                                
+                            } else {
+                                console.error('Error in API response:', response.data.message)
+                            }
+                        } catch (error) {
+                            console.error('Error in API request:', error)
+                        }
                 }
             } catch (err) {
                 console.log(err)

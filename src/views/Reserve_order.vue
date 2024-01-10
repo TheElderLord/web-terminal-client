@@ -46,7 +46,9 @@ export default {
             : arr.find((el) => el.includes('EN')).replace('EN=', '')
         return result
       } catch (err) {
+        
         console.log(err)
+        return service;
       }
     },
     async getWebServices() {
@@ -58,7 +60,9 @@ export default {
           queuId: '?'
         }
       )
-      this.services = response.data.data
+      const webs = response.data.data.filter(element => element !== "" || element !==undefined);
+      this.services = webs;
+      
       // console.log(this.services)
     },
     async getDays() {

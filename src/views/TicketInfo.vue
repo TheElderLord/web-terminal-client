@@ -72,7 +72,7 @@ export default {
                 <div class="in text-center text-2xl leading-normal">{{ resp["cus:servicename"][0] }}</div>
             </div>
             <div class="info text-white  flex justify-center items-center py-3">
-                <div class="in text-center text-2xl leading-normal">Код для оценки: {{ resp["cus:ordernum"][0] }}</div>
+                <div class="in text-center text-2xl leading-normal">{{ getLang() == 'kz' ? 'Бағалау коды' : getLang() == 'ru' ? 'Код для оценки:' : 'Code for evalutation' }} {{ resp["cus:ordernum"][0] }}</div>
             </div>
         </div>
         <div class="buttons w-2/5 mx-auto mt-8">

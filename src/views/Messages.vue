@@ -28,7 +28,7 @@ export default {
           result = e.replace('KZ=', '')
         } else if (this.getLang() == 'ru' && e.includes('RU=')) {
           result = e.replace('RU=', '')
-        } else if (this.getLang() == 'en' && e.includes('EN=')) {
+        } else if (this.getLang() == 'eng' && e.includes('EN=')) {
           result = e.replace('EN=', '')
         }
       })
@@ -49,7 +49,7 @@ export default {
   <main class="w-4/5 mx-auto">
     <div class="container mx-auto w-full h-64 mt-10">
       <div class="flex justify-center"><img src="../assets/warning.png" alt="" /></div>
-      <div class="textBlock text-white text-3xl text-center py-5">
+      <div class="textBlock text-white text-3xl text-center py-5 mt-3">
         {{ formatted(getMessage()) }}
       </div>
       <!-- <div class="textBlock text-white text-3xl text-center py-5 ">dasfasdasdas</div> -->

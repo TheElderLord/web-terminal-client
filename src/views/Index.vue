@@ -76,7 +76,10 @@ export default {
                             const branchId = BRANCH_ID;
                             const queueId = service.queueId[0];
                             const iin = this.getiin() ? this.getiin() : '?'
-                            const local = this.getLang();
+                            let local = this.getLang();
+                            if(this.getLang == "eng"){
+                                local = 'en';
+                            }
                             const body = {
                                 branchId: branchId,
                                 queueId: queueId,

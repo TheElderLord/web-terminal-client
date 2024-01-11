@@ -87,7 +87,7 @@ export default {
 </script>
 <template>
   <div class="md:container mx-auto justify-center items-center p-5">
-    <div v-if="rated" class="container mx-auto text-center text-white text-3xl m-2 font-bold">
+    <div v-if="rated" class="container mx-auto text-center text-white text-3xl my-5 mx-2 py-3 font-bold">
       <p class="leading-relaxed">
         {{
           getLang() === 'kz'
@@ -98,7 +98,7 @@ export default {
         }}
       </p>
     </div>
-    <div
+    <div v-if="!rated"
       class="rates text-center p-3 m-4 w-8/12 mx-auto bg-white bg-opacity-20 rounded-lg sm:w-10/12"
     >
       <div

@@ -52,6 +52,10 @@ export default {
                     this.setTicketBody(result.data.code);
                     this.$router.push('/ticket-info');
                 }
+                else if(result.data.message == "NO"){
+                    this.stateStore.set_message("RU=Не найдено билетов по коду;KZ=Код бойынша билет табылмады;EN=No ticket was found for code")
+                    return this.$router.push('/messages')
+                }
                 else{
                     this.error = true
                 }

@@ -56,6 +56,10 @@ export default {
                     this.stateStore.set_message("RU=Не найдено билетов по коду;KZ=Код бойынша билет табылмады;EN=No ticket was found for code")
                     return this.$router.push('/messages')
                 }
+                else if(result.data.message == "NO TIME"){
+                    this.stateStore.set_message("RU=Неподходящее время;KZ=Дұрыс емес уақыт;EN=Invalid time")
+                    return this.$router.push('/messages')
+                }
                 else{
                     this.error = true
                 }
@@ -127,7 +131,9 @@ export default {
         </div>
         <div class="md:container md:mx-auto text-white  mt-2 flex justify-center" >
             <div class=" keys    flex items-center justify-center m-4">
-                <div class="text-center  bg-yellow-600  text-2xl p-5 w-64 rounded-lg" @click="goBack()">Артқа</div>
+                <div class="text-center  bg-yellow-600  text-2xl p-5 w-64 rounded-lg" @click="goBack()">
+                    {{ getLang() == 'kz' ? 'Басты бет' : getLang() == 'ru' ? 'Главная страница' : 'Main page' }}
+                </div>
             </div>
             
         </div>

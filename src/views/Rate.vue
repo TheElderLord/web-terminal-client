@@ -61,14 +61,14 @@ export default {
 
         setTimeout(() => {
           this.goBack()
-        }, 5000)
+        }, 30000)
       }
       }catch{
         this.rated = true
 
         setTimeout(() => {
           this.goBack()
-        }, 5000)
+        }, 30000)
         // this.stateStore.set_message(
         //   'RU=Произошла ошибка. Попробуйте поэже;KZ=Қате. Кейін қайталап көріңіз;EN=Error occured. Try again later'
         // )

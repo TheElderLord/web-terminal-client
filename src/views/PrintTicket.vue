@@ -19,7 +19,7 @@ export default{
         console.log(phone_req)
         setTimeout(()=>{
             this.getStart()
-        },5000);   
+        },30000);   
     },
 }
 </script>

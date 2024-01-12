@@ -37,7 +37,11 @@ export default {
             // if(this.error){
             //     return
             // }
-           
+            if(this.book_code == '' || this.book_code == null){
+                this.error = true;
+                return;
+            }
+            
             this.stateStore.set_rating_code(this.book_code)
             this.$router.push('/rate')
 
@@ -86,9 +90,9 @@ export default {
                     getLang()==="kz"? "КОД енгізіңіз":getLang()==="ru"?"Введите код":"Enter the code"
                 }}</h1>
                 <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="book_code">
-                <!-- <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-2">{{
+                <div v-if="error" class="error-text text-red-500 text-xl mt-2">{{
                     getLang()==="kz"? "Дұрыс емес код":getLang()==="ru"?"Неверный код":"Invalid code"
-                }}</div> -->
+                }}</div>
             </div>
             <div class=" grid grid-cols-3 gap-5 ">
                 <div class="keys  h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(1)">1</div>

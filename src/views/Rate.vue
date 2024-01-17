@@ -59,7 +59,9 @@ export default {
             'RU=Прошло время оценки;KZ=Бағалау уақыты өтіп кеткен;EN=Ticket is already reported'
           )
           return this.$router.push('/messages')
-        } else {
+        } 
+      }
+        else {
           this.rated = true
 
           console.log('Line 64 redirect rate page')
@@ -69,7 +71,7 @@ export default {
             }
           }, 5000)
         }
-      }
+     
       } catch {
         this.rated = true
 

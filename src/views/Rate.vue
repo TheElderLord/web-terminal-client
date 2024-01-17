@@ -5,6 +5,7 @@ import { SERVER_HOST } from '../constants'
 import { SERVER_PORT } from '../constants'
 const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
 const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
+const show_err = import.meta.env.VITE_SERVER_SHOW_ORDER_ERROR;
 export default {
   name: 'rate-page',
   data() {
@@ -51,10 +52,11 @@ export default {
           rating: mark
         })
 
+        if(show_err == 'true'){
         const m = result.data.message
         if (m == 'REP') {
           this.stateStore.set_message(
-            'RU=Билет уже оценили;KZ=Билетке баға қойылған;EN=Ticket is already reported'
+            'RU=Прошло время оценки;KZ=Бағалау уақыты өтіп кеткен;EN=Ticket is already reported'
           )
           return this.$router.push('/messages')
         } else {
@@ -67,6 +69,7 @@ export default {
             }
           }, 5000)
         }
+      }
       } catch {
         this.rated = true
 

@@ -51,6 +51,7 @@ export default {
           orderNum: orderNum,
           rating: mark
         })
+        console.log(result)
 
         if(show_err == 'true'){
         const m = result.data.message
@@ -59,9 +60,9 @@ export default {
             'RU=Прошло время оценки;KZ=Бағалау уақыты өтіп кеткен;EN=Ticket is already reported'
           )
           return this.$router.push('/messages')
-        } 
-      }
-        else {
+           } 
+         }
+        // else {
           this.rated = true
 
           console.log('Line 64 redirect rate page')
@@ -69,8 +70,8 @@ export default {
             if (currentPath === '/rate') {
               this.goBack()
             }
-          }, 5000)
-        }
+          }, 3000)
+        // }
      
       } catch {
         this.rated = true

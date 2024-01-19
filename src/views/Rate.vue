@@ -70,7 +70,7 @@ export default {
             if (currentPath === '/rate') {
               this.goBack()
             }
-          }, 3000)
+          }, 5000)
         // }
      
       } catch {

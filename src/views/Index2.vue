@@ -108,7 +108,23 @@ export default {
     },
     mounted() {
         this.getServices();
-    }
+        this.checkRouteInterval = setInterval(() => {
+      const currentPath = this.$route.path
+
+      // Check if the route is '/rate'
+      if (currentPath === '/index2') {
+        console.log('Line 116 redirect index2 page')
+        this.goBack()
+
+        // Clear the interval if the condition is met
+        clearInterval(this.checkRouteInterval)
+      }
+    }, 30000)
+    },
+    beforeUnmount() {
+    // Clear the interval when the component is about to be unmounted
+    clearInterval(this.checkRouteInterval);
+  }
 }
 </script>
 <template>

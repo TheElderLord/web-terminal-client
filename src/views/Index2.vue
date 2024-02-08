@@ -35,13 +35,19 @@ export default {
             return this.stateStore.get_queueId
         },
         async getServices() {
-            // console.log(branchId)
-            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`,{
+            try{
+                const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`,{
                 branchId:BRANCH_ID, 
                 queueId:this.getQueueId()
             });
             this.services = response.data.content;
             console.log(this.services)
+
+            }catch(err){
+                console.log(err);
+            }
+            // console.log(branchId)
+        
 
         },
         getFormatService(service) {

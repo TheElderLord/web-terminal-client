@@ -81,6 +81,9 @@ export default {
         },
         goBooking(){
             this.$router.push('/booking');
+        },
+        inputFocus() {
+            this.$refs.iininput.focus(); // Focus on the input element with the ref "iininput"
         }
 
     },
@@ -114,7 +117,7 @@ export default {
 
                 <h1 class="text-white text-2xl m-3">{{ getLang() === "kz" ? "ЖСН енгізіңіз" : getLang() === "ru"
                     ? "Введите ИИН" : "Enter the IIN" }}</h1>
-                <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="IIN" maxlength="12">
+                <input ref="iininput" type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="IIN" maxlength="12">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-2 mb-0 p-0">{{ getLang() === "kz" ? "Дұрыс емес ЖСН"
                                     : getLang() === "ru" ? "Неправильный ИИН" : "Invalid IIN" }}</div>
             </div>
@@ -144,7 +147,7 @@ export default {
 
         <div class="md:container md:mx-auto text-white  mt-3 flex justify-center">
             <div class="keys flex items-center justify-center m-4">
-                <div class="text-center  bg-yellow-600  text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
+                <div @click="inputFocus()" class="text-center  bg-yellow-600  text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
                     "ru"
                     ? "Сканировать ИИН" : "Scan the IIN" }}</div>
             </div>

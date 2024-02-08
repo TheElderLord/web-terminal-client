@@ -101,7 +101,7 @@ export default {
       // Clear the interval if the condition is met
       clearInterval(this.checkRouteInterval);
     }
-  }, 30000);
+  }, 24000);
 },
 beforeUnmount() {
   // Clear the interval when the component is destroyed or route changes

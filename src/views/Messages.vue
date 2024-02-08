@@ -41,7 +41,20 @@ export default {
       stateStore
     }
   },
-  mounted() {}
+  mounted() {
+    this.checkRouteInterval = setInterval(() => {
+      const currentPath = this.$route.path
+
+      // Check if the route is '/rate'
+      if (currentPath === '/messages') {
+        console.log('Line 50 redirect messages page')
+        this.getStart()
+
+        // Clear the interval if the condition is met
+        clearInterval(this.checkRouteInterval)
+      }
+    }, 24000)
+  }
 }
 </script>
 

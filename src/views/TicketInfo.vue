@@ -8,13 +8,13 @@ const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
 export default {
   data() {
     return {
-      resp: null
+      resp: null,
     }
   },
   setup() {
     const stateStore = useStateStore()
     return {
-      stateStore
+      stateStore,
     }
   },
   methods: {
@@ -33,29 +33,22 @@ export default {
       } else this.$router.push('/')
     },
     async print() {
-      const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`, {
-        // local: this.getLang(),
-        local: 'ru',
-        soapBody: this.resp
-      })
-      if (response.status === 200) this.$router.push('/print')
+      try {
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`, {
+          // local: this.getLang(),
+          local: 'ru',
+          soapBody: this.resp,
+        })
+        if (response.status === 200) this.$router.push('/print')
+      } catch (err) {
+        console.log(err)
+      }
     },
 
     async sendEvent() {
       const body = this.getTicketBody()
       this.resp = body
-    }
-  },
-  computed: {
-    // goMain() {
-    //   const currentPath = this.$route.path
-    //   console.log('Line 88 redirect ticketinfo page')
-    //     setTimeout(() => {
-    //     if (currentPath === '/ticket-info') {
-    //       this.getStart()
-    //     }
-    //   }, 30000)
-    // }
+    },
   },
   mounted() {
     this.sendEvent()
@@ -64,7 +57,7 @@ export default {
 
       // Check if the route is '/rate'
       if (currentPath === '/ticket-info') {
-        console.log('Line 67 redirect ticket info page')
+        // console.log('Line 67 redirect ticket info page')
         this.getStart()
 
         // Clear the interval if the condition is met
@@ -75,7 +68,7 @@ export default {
   beforeUnmount() {
     // Clear the interval when the component is about to be unmounted
     clearInterval(this.checkRouteInterval)
-  }
+  },
 }
 </script>
 <template>

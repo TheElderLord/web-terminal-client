@@ -4,17 +4,20 @@ import { useStateStore } from '../store'
 import { BRANCH_ID } from '../constants'
 import { SERVER_HOST } from '../constants'
 import { SERVER_PORT } from '../constants'
+const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
+const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
+
 export default {
   name: 'index-page',
   data() {
     return {
-      services: ''
+      services: '',
     }
   },
   setup() {
     const stateStore = useStateStore()
     return {
-      stateStore
+      stateStore,
     }
   },
   computed: {},
@@ -39,7 +42,7 @@ export default {
         // console.log(branchId)
         const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`, {
           branchId: BRANCH_ID,
-          queueId: '?'
+          queueId: '?',
         })
         this.services = response.data.content
         console.log(this.services)
@@ -88,13 +91,13 @@ export default {
               branchId: branchId,
               queueId: queueId,
               iin: iin,
-              local: local
+              local: local,
             }
             // console.log(body);
 
             const response = await axios.post(
               `http://${SERVER_HOST}:${SERVER_PORT}/services/event-now`,
-              body
+              body,
             )
             console.log('Response', response)
             if (response.data.message == 'Success') {
@@ -113,7 +116,14 @@ export default {
     },
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-    }
+    },
+    goMain() {
+      if (iin_req === 'true') {
+        this.$router.push('/iin')
+      } else if (phone_req === 'true') {
+        this.$router.push('/phone')
+      } else this.$router.push('/')
+    },
   },
   mounted() {
     this.getServices()
@@ -122,8 +132,8 @@ export default {
 
       // Check if the route is '/rate'
       if (currentPath === '/') {
-        console.log('Line 125 redirect index page')
-        this.goBack()
+        // console.log('Line 125 redirect index page')
+        this.goMain()
 
         // Clear the interval if the condition is met
         clearInterval(this.checkRouteInterval)
@@ -133,7 +143,7 @@ export default {
   beforeUnmount() {
     // Clear the interval when the component is about to be unmounted
     clearInterval(this.checkRouteInterval)
-  }
+  },
 }
 </script>
 <template>

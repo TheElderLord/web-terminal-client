@@ -18,13 +18,13 @@ export default {
       day: null,
       time: null,
 
-      bookCode: null
+      bookCode: null,
     }
   },
   setup() {
     const stateStore = useStateStore()
     return {
-      stateStore
+      stateStore,
     }
   },
 
@@ -46,66 +46,78 @@ export default {
             : arr.find((el) => el.includes('EN')).replace('EN=', '')
         return result
       } catch (err) {
-        
         console.log(err)
-        return service;
+        return service
       }
     },
     async getWebServices() {
-      this.services = [];
-      const response = await axios.post(
-        `http://${SERVER_HOST}:${SERVER_PORT}/booking/webservices`,
-        {
-          branchId: branchId,
-          queuId: '?'
-        }
-      )
-      const webs = response.data.data.filter(element => element !== "" || element !==undefined);
-      this.services = webs;
-      
+      try {
+        this.services = []
+        const response = await axios.post(
+          `http://${SERVER_HOST}:${SERVER_PORT}/booking/webservices`,
+          {
+            branchId: branchId,
+            queuId: '?',
+          },
+        )
+        const webs = response.data.data.filter((element) => element !== '' || element !== undefined)
+        this.services = webs
+      } catch (err) {
+        console.log(err)
+      }
+
       // console.log(this.services)
     },
     async getDays() {
-      this.days = [];
-      const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/days`, {
-        branchId: branchId
-      })
-      this.days.push(response.data[0])
-      this.days.push(response.data[1])
+      try {
+        this.days = []
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/days`, {
+          branchId: branchId,
+        })
+        this.days.push(response.data[0])
+        this.days.push(response.data[1])
+      } catch (err) {
+        console.log(err)
+      }
+
       // console.log(this.days)
     },
     async getTime() {
-      this.slots = [];
+      this.slots = []
       const now = new Date()
       const bookDay = now.getDate() == this.day.substring(0, 2) ? 0 : this.day.substring(0, 2)
       console.log(bookDay)
       const body = {
         branchId: branchId,
         queueId: this.queueId,
-        day: bookDay
+        day: bookDay,
       }
-      console.log(body)
-      const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/time`, body)
+      // console.log(body)
+      try {
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/time`, body)
 
-      this.slots = response.data
-      this.slots.shift()
-      console.log(this.slots)
+        this.slots = response.data
+        this.slots.shift()
+        console.log(this.slots)
+      } catch (err) {
+        console.log(err)
+      }
     },
     async reserve() {
-      const formattedTime = this.time.split('-')[1];
+      const formattedTime = this.time.split('-')[1]
 
-      const bookTime = this.time.split('-')[0] + ':' + formattedTime + ':00' + '/' + this.day;
+      const bookTime = this.time.split('-')[0] + ':' + formattedTime + ':00' + '/' + this.day
       const reqBody = {
         branchId: branchId,
         queueId: this.queueId,
         iin: '?',
-        time: bookTime
-      };
-      console.log(reqBody);
+        time: bookTime,
+      }
+      console.log(reqBody)
       try {
         const response = await axios.post(
           `http://${SERVER_HOST}:${SERVER_PORT}/booking/reserve`,
-          reqBody
+          reqBody,
         )
         this.bookCode = response.data[0]
         this.queueId = ''
@@ -113,15 +125,15 @@ export default {
         this.time = ''
         this.hide = false
       } catch {
-         this.stateStore.set_message(
-          'RU=Произошла ошибка. Попробуйте поэже;KZ=Қате. Кейін қайталап көріңіз;EN=Error occured. Try again later'
+        this.stateStore.set_message(
+          'RU=Произошла ошибка. Попробуйте поэже;KZ=Қате. Кейін қайталап көріңіз;EN=Error occured. Try again later',
         )
         this.queueId = ''
         this.day = ''
         this.time = ''
         this.hide = false
         return this.$router.push('/messages')
-    }
+      }
 
       // if(response.data == 'Failed'){
       //     alert("error occured")
@@ -137,11 +149,27 @@ export default {
       } else {
         this.$router.push('/')
       }
-    }
+    },
   },
   mounted() {
     this.getWebServices()
-  }
+    this.checkRouteInterval = setInterval(() => {
+      const currentPath = this.$route.path
+
+      // Check if the route is '/rate'
+      if (currentPath === '/reserve-order') {
+        // console.log('Line 125 redirect index page')
+        this.goMain()
+
+        // Clear the interval if the condition is met
+        clearInterval(this.checkRouteInterval)
+      }
+    }, 24000)
+  },
+  beforeUnmount() {
+    // Clear the interval when the component is about to be unmounted
+    clearInterval(this.checkRouteInterval)
+  },
 }
 </script>
 <template>

@@ -65,7 +65,7 @@ export default {
         // else {
           this.rated = true
 
-          console.log('Line 64 redirect rate page')
+          // console.log('Line 64 redirect rate page')
           setTimeout(() => {
             if (currentPath === '/rate') {
               this.goBack()
@@ -76,10 +76,10 @@ export default {
       } catch {
         this.rated = true
 
-        console.log('Line 74 redirect rate page')
+        // console.log('Line 74 redirect rate page')
         setTimeout(() => {
           if (currentPath === '/rate') {
-            this.goBack()
+            this.goBack();
           }
         }, 5000)
         // this.stateStore.set_message(
@@ -95,7 +95,7 @@ export default {
 
     // Check if the route is '/rate'
     if (currentPath === '/rate') {
-      console.log('Line 92 redirect rate page');
+      // console.log('Line 92 redirect rate page');
       this.goBack();
 
       // Clear the interval if the condition is met

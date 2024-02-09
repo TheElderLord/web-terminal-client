@@ -19,8 +19,8 @@ export default {
 
       // Check if the route is '/rate'
       if (currentPath === '/print') {
-        console.log('Line 23 redirect print page')
-        this.goBack()
+        // console.log('Line 23 redirect print page')
+        this.getStart();
 
         // Clear the interval if the condition is met
         clearInterval(this.checkRouteInterval)

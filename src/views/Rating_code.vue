@@ -2,8 +2,11 @@
 import { useStateStore } from '../store'
 import { SERVER_HOST } from '../constants'
 import { SERVER_PORT } from '../constants'
-const branchId = import.meta.env.VITE_SERVER_BRANCH_ID
-import axios from 'axios'
+const branchId = import.meta.env.VITE_SERVER_BRANCH_ID;
+import axios from 'axios';
+const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
+const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
+
 export default {
   data() {
     return {
@@ -85,6 +88,13 @@ export default {
       //   this.stateStore.set_rating_code(this.book_code)
       //   this.$router.push('/rate')
     },
+    getStart() {
+      if (iin_req === 'true') {
+        this.$router.push('/iin')
+      } else if (phone_req === 'true') {
+        this.$router.push('/phone')
+      } else this.$router.push('/')
+    },
     // isCorrect() {
     //     if (this.book_code.length > 0 && this.book_code.length < 12 || this.book_code.length > 12) {
     //         return true;
@@ -109,7 +119,22 @@ export default {
         default:
           this.book_code = this.book_code.replace(/[^0-9]/g, '')
       }
-    })
+    });
+    this.checkRouteInterval = setInterval(() => {
+      const currentPath = this.$route.path
+
+      // Check if the route is '/rate'
+      if (currentPath === '/rating-code') {
+        // console.log('Line 125 redirect index page')
+        this.getStart();
+
+        // Clear the interval if the condition is met
+        clearInterval(this.checkRouteInterval)
+      }
+    }, 24000);
+  },
+  beforeUnmount(){
+    clearInterval(this.checkRouteInterval);
   }
 }
 </script>

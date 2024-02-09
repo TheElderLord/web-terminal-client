@@ -22,23 +22,27 @@ export default {
       } else this.$router.push('/')
     },
     formatted(val) {
-      let result
-      val.split(';').forEach((e) => {
-        if (this.getLang() == 'kz' && e.includes('KZ=')) {
-          result = e.replace('KZ=', '')
-        } else if (this.getLang() == 'ru' && e.includes('RU=')) {
-          result = e.replace('RU=', '')
-        } else if (this.getLang() == 'eng' && e.includes('EN=')) {
-          result = e.replace('EN=', '')
-        }
-      })
-      return result
-    }
+      try {
+        let result
+        val.split(';').forEach((e) => {
+          if (this.getLang() == 'kz' && e.includes('KZ=')) {
+            result = e.replace('KZ=', '')
+          } else if (this.getLang() == 'ru' && e.includes('RU=')) {
+            result = e.replace('RU=', '')
+          } else if (this.getLang() == 'eng' && e.includes('EN=')) {
+            result = e.replace('EN=', '')
+          }
+        })
+        return result
+      } catch (err) {
+        console.log(err)
+      }
+    },
   },
   setup() {
     const stateStore = useStateStore()
     return {
-      stateStore
+      stateStore,
     }
   },
   mounted() {
@@ -47,14 +51,14 @@ export default {
 
       // Check if the route is '/rate'
       if (currentPath === '/messages') {
-        console.log('Line 50 redirect messages page')
-        this.getStart()
+        // console.log('Line 50 redirect messages page')
+        this.goBack()
 
         // Clear the interval if the condition is met
         clearInterval(this.checkRouteInterval)
       }
     }, 24000)
-  }
+  },
 }
 </script>
 

@@ -35,8 +35,8 @@ export default {
     async print() {
       try {
         const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`, {
-          // local: this.getLang(),
-          local: 'ru',
+          local: this.getLang(),
+          // local: 'ru',
           soapBody: this.resp,
         })
         if (response.status === 200) this.$router.push('/print')

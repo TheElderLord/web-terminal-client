@@ -88,6 +88,7 @@ export default {
 
     },
     mounted() {
+    this.$refs.iininput.focus();
     document.addEventListener('keydown', (e) => {
         try {
             switch (e.key) {

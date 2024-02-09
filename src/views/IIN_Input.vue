@@ -147,17 +147,17 @@ export default {
         </div>
 
         <div class="md:container md:mx-auto text-white  mt-3 flex justify-center">
-            <div class="keys flex items-center justify-center m-4">
+            <!-- <div class="keys flex items-center justify-center m-4">
                 <div @click="inputFocus()" class="text-center  bg-yellow-600  text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
                     "ru"
                     ? "Сканировать ИИН" : "Scan the IIN" }}</div>
-            </div>
+            </div> -->
 
 
             <div class="keys flex items-center justify-center m-4">
 
 
-                <div class="text-center  bg-yellow-600 text-xl p-5 rounded-lg" @click="goRating()">{{ getLang() === "kz"
+                <div class="text-center w-full  bg-yellow-600 text-xl p-5 rounded-lg" @click="goRating()">{{ getLang() === "kz"
                     ? "Қызмет көрсету сапасын бағалау" : getLang() === "ru"
                         ? "Оценка качества обслуживания" : "Rate the quality of service" }}</div>
 
@@ -165,7 +165,7 @@ export default {
             <div class="keys flex items-center justify-center m-4">
 
 
-                <div class="text-center  bg-yellow-600 text-xl p-5 rounded-lg" @click="goBooking()">{{ getLang() === "kz"
+                <div class="text-center w-full  bg-yellow-600 text-xl p-5 rounded-lg" @click="goBooking()">{{ getLang() === "kz"
                     ? "Броньдау" : getLang() === "ru"
                         ? "Бронирование" : "Reservation" }}</div>
 

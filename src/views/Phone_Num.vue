@@ -91,7 +91,7 @@ export default {
             <div class="numpadHeader text-center m-3 ">
                 <h1 class="text-white text-2xl m-3">{{getLang()==="kz"? "Телефон номерін енгізіңіз"
                     : getLang()==="ru" ? "Введите номер телефона":"Enter the phone number"}}</h1>
-                <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center"
+                <input type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center text-black"
                     v-model="phone_number" maxlength="11">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-4">{{getLang()==="kz"? "Дурыс емес телефон номері"
                     : getLang()==="ru" ? "Неправильный номер телефона": "Invalid phone number" }}</div>

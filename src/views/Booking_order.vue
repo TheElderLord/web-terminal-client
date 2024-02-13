@@ -137,7 +137,7 @@ export default {
           type="text"
           name="IIN"
           id="IINInp"
-          class="w-full h-12 rounded-md text-xl text-center"
+          class="w-full h-12 rounded-md text-xl text-center text-black"
           v-model="booking_code"
         />
         <div v-if="error" class="error-text text-red-500 text-xl mt-4">

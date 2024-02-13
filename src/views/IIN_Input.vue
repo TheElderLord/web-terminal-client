@@ -96,6 +96,7 @@ export default {
                     this.delNum();
                     break;
                 case "Enter":
+                console.log(this.IIN)
                     this.submit();
                     break;
                 default: 
@@ -118,7 +119,7 @@ export default {
 
                 <h1 class="text-white text-2xl m-3">{{ getLang() === "kz" ? "ЖСН енгізіңіз" : getLang() === "ru"
                     ? "Введите ИИН" : "Enter the IIN" }}</h1>
-                <input ref="iininput" type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-center" v-model="IIN" maxlength="12">
+                <input ref="iininput" type="text" name="IIN" id="IINInp" class="w-full h-12 rounded-md text-xl text-black text-center" v-model="IIN" maxlength="12">
                 <div v-if="isCorrect()" class="error-text text-red-500 text-xl mt-2 mb-0 p-0">{{ getLang() === "kz" ? "Дұрыс емес ЖСН"
                                     : getLang() === "ru" ? "Неправильный ИИН" : "Invalid IIN" }}</div>
             </div>

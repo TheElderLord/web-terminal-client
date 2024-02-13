@@ -124,6 +124,25 @@ export default {
         this.$router.push('/phone')
       } else this.$router.push('/')
     },
+    detectService(service) {
+      if (service.cssclass[0].includes('red')) {
+        return {
+          backgroundColor: 'red', // Set your desired style here
+          // Add more styles if needed
+        }
+      } else if(service.cssclass[0].includes('green'))  {
+        return {
+          backgroundColor: 'green', // Set your desired style here
+          // Add more styles if needed
+        }
+      }
+      else {
+        return {
+          backgroundColor: '#ca8a04', // Set your desired style here
+          // Add more styles if needed
+        }
+      }
+    },
   },
   mounted() {
     this.getServices()
@@ -153,7 +172,8 @@ export default {
         v-for="service in services"
         :key="service.id"
         @click="goNext(service)"
-        class="service text-white text-xl bg-yellow-600 rounded-lg flex items-center justify-center basis-5/12 py-4 m-2"
+        :style="detectService(service)"
+        class="service text-white text-xl rounded-lg flex items-center justify-center basis-5/12 py-4 m-2"
       >
         <div class="text-center">{{ getFormatService(service.workName[0]) }}</div>
       </div>

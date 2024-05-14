@@ -1,4 +1,4 @@
-<script>
+                <script>
 import axios from 'axios'
 import { useStateStore } from '../store'
 import { BRANCH_ID } from '../constants'

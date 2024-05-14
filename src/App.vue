@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount } from 'vue';
+import {ref, onBeforeMount, watch } from 'vue';
 import Header from './components/Header.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -20,19 +20,30 @@ const router = createRouter({
   ] // Add your routes here
 });
 
+const isNotSlide = ref(true);
+
 onBeforeMount(() => {
- if (iin_req == "true" ) {
-   
-    // Assuming you have a route named 'IIN'
+  if (iin_req == 'true') {
     router.push({ name: 'iin' });
-  }
-  else if (phone_req == "true" ){
+  } else if (phone_req == 'true') {
     router.push({ name: 'phone' });
-  }
-  else {
-    // Assuming you have a route named 'index'
+  } else {
     router.push({ name: 'index' });
   }
+
+  // Initialize isNotSlide based on the initial route
+  isNotSlide.value = router.currentRoute.value.path !== '/slide';
+
+  // Watch for changes in the route and update isNotSlide accordingly
+  watch(
+    () => router.currentRoute.value,
+    (to, from) => {
+      console.log(from.path)
+      isNotSlide.value = to.path != '/slide';
+      console.log(to.path)
+      console.log(isNotSlide.value)
+    }
+  );
 });
 </script>
 

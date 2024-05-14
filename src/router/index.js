@@ -20,6 +20,9 @@ import Rate from '../views/Rate.vue';
 import Messages from '../views/Messages.vue'
 
 import PrintTicket from '../views/PrintTicket.vue';
+import Slide from '../views/Slide.vue';
+
+
 const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED;
 const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED;
 
@@ -116,6 +119,13 @@ const router = createRouter({
       path: '/messages',
       name: 'messages',
       component: Messages,
+      props: true
+
+    },
+    {
+      path: '/slide',
+      name: 'Slide',
+      component: Slide,
       props: true
 
     },

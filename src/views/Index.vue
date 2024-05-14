@@ -1,4 +1,4 @@
-<script >
+<script>
 import axios from 'axios'
 import { useStateStore } from '../store'
 import { BRANCH_ID } from '../constants'
@@ -6,6 +6,7 @@ import { SERVER_HOST } from '../constants'
 import { SERVER_PORT } from '../constants'
 const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
 const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
+// import img from "./img/icon/paper.png"
 
 export default {
   name: 'index-page',
@@ -57,8 +58,8 @@ export default {
           this.getLang() === 'kz'
             ? arr.find((el) => el.includes('KZ')).replace('KZ=', '')
             : this.getLang() === 'ru'
-            ? arr.find((el) => el.includes('RU')).replace('RU=', '')
-            : arr.find((el) => el.includes('EN')).replace('EN=', '')
+              ? arr.find((el) => el.includes('RU')).replace('RU=', '')
+              : arr.find((el) => el.includes('EN')).replace('EN=', '')
         return result
       } catch (err) {
         console.log(err)
@@ -125,18 +126,18 @@ export default {
       } else this.$router.push('/')
     },
     detectService(service) {
+      console.log(service.cssclass[0])
       if (service.cssclass[0].includes('red')) {
         return {
           backgroundColor: 'red', // Set your desired style here
           // Add more styles if needed
         }
-      } else if(service.cssclass[0].includes('green'))  {
+      } else if (service.cssclass[0].includes('green')) {
         return {
           backgroundColor: 'green', // Set your desired style here
           // Add more styles if needed
         }
-      }
-      else {
+      } else {
         return {
           backgroundColor: '#ca8a04', // Set your desired style here
           // Add more styles if needed
@@ -173,9 +174,13 @@ export default {
         :key="service.id"
         @click="goNext(service)"
         :style="detectService(service)"
-        class="service text-white text-xl rounded-lg flex items-center justify-center basis-5/12 py-4 m-2"
+        class="service text-white rounded-lg flex items-center justify-center basis-5/12 py-10 px-4 m-2"
+        :class="service.cssclass[0]"
       >
-        <div class="text-center">{{ getFormatService(service.workName[0]) }}</div>
+        <div class="icon basis-1/5 h-full"></div>
+        <div class="text-center basis-4/5 text-2xl">
+          {{ getFormatService(service.workName[0]) }}
+        </div>
       </div>
       <div
         @click="goBack()"
@@ -196,5 +201,207 @@ export default {
 <style scoped>
 .service {
   cursor: pointer;
+}
+.icon {
+  padding: 0.2rem;
+}
+.paper .icon {
+  background-image: url('./img/icon/paper.png');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center;
+}
+
+.paperYellow .icon {
+  background-image: url('./img/icon/paperYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.bars .icon {
+  background-image: url('./img/icon/bars.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.bell .icon {
+  background-image: url('./img/icon/bell.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.bellYellow .icon {
+  background-image: url('./img/icon/bellYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.boxXpaper .icon {
+  background-image: url('./img/icon/boxXpaper.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.calendar .icon {
+  background-image: url('./img/icon/calendar.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.card .icon {
+  background-image: url('./img/icon/card.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.cardYellow .icon {
+  background-image: url('./img/icon/cardYellow');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.checklistYellow .icon {
+  background-image: url('./img/icon/checklistYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.clips .icon {
+  background-image: url('./img/icon/clips.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.loop .icon {
+  background-image: url('./img/icon/loop.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.mech .icon {
+  background-image: url('./img/icon/mech.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.paper2 .icon {
+  background-image: url('./img/icon/paper2.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.paperCheck .icon {
+  background-image: url('./img/icon/paperCheck.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.paperCheckYes .icon {
+  background-image: url('./img/icon/paperCheckYes.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.paperwrite .icon {
+  background-image: url('./img/icon/paperWrite.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.paperX .icon {
+  background-image: url('./img/icon/paperX.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.paperXpost .icon {
+  background-image: url('./img/icon/paperXpost.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.phone .icon {
+  background-image: url('./img/icon/phone.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.post .icon {
+  background-image: url('./img/icon/post.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.question .icon {
+  background-image: url('./img/icon/question.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.questionYellow .icon {
+  background-image: url('./img/icon/questionYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.tagYellow .icon {
+  background-image: url('./img/icon/tagYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.text .icon {
+  background-image: url('./img/icon/text.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.userWhite .icon {
+  background-image: url('./img/icon/userWhite.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.userYellow .icon {
+  background-image: url('./img/icon/userYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+}
+
+.writeYellow .icon {
+  background-image: url('./img/icon/writeYellow.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
 }
 </style>

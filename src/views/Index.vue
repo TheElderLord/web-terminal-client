@@ -174,11 +174,11 @@ export default {
         :key="service.id"
         @click="goNext(service)"
         :style="detectService(service)"
-        class="service text-white rounded-lg flex items-center justify-center basis-5/12 py-10 px-4 m-2"
+        class="service text-white rounded-lg flex items-center justify-center basis-5/12 m-2"
         :class="service.cssclass[0]"
       >
-        <div class="icon basis-1/5 h-full"></div>
-        <div class="text-center basis-4/5 text-2xl">
+        <div class="icon basis-1/5 "></div>
+        <div class="serviceName text-center basis-4/5 text-2xl">
           {{ getFormatService(service.workName[0]) }}
         </div>
       </div>
@@ -198,136 +198,148 @@ export default {
     </div>
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
+
 .service {
   cursor: pointer;
+  height: 150px;
+  padding: 1rem;
+  .icon{
+      width: 100%;
+      height: 100%;
+  }
+  .serviceName{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
-.icon {
-  padding: 0.2rem;
-}
+
 .paper .icon {
   background-image: url('./img/icon/paper.png');
   background-repeat: no-repeat;
-  background-size: 70%;
+  background-size: 80%;
   background-position: center;
 }
 
 .paperYellow .icon {
   background-image: url('./img/icon/paperYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .bars .icon {
   background-image: url('./img/icon/bars.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .bell .icon {
   background-image: url('./img/icon/bell.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .bellYellow .icon {
   background-image: url('./img/icon/bellYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .boxXpaper .icon {
   background-image: url('./img/icon/boxXpaper.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .calendar .icon {
   background-image: url('./img/icon/calendar.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .card .icon {
   background-image: url('./img/icon/card.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .cardYellow .icon {
   background-image: url('./img/icon/cardYellow');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .checklistYellow .icon {
   background-image: url('./img/icon/checklistYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .clips .icon {
   background-image: url('./img/icon/clips.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .loop .icon {
   background-image: url('./img/icon/loop.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .mech .icon {
   background-image: url('./img/icon/mech.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .paper2 .icon {
   background-image: url('./img/icon/paper2.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .paperCheck .icon {
   background-image: url('./img/icon/paperCheck.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .paperCheckYes .icon {
   background-image: url('./img/icon/paperCheckYes.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .paperwrite .icon {
   background-image: url('./img/icon/paperWrite.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .paperX .icon {
   background-image: url('./img/icon/paperX.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -336,7 +348,7 @@ export default {
 .paperXpost .icon {
   background-image: url('./img/icon/paperXpost.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -345,63 +357,63 @@ export default {
 .phone .icon {
   background-image: url('./img/icon/phone.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .post .icon {
   background-image: url('./img/icon/post.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .question .icon {
   background-image: url('./img/icon/question.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .questionYellow .icon {
   background-image: url('./img/icon/questionYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .tagYellow .icon {
   background-image: url('./img/icon/tagYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .text .icon {
   background-image: url('./img/icon/text.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .userWhite .icon {
   background-image: url('./img/icon/userWhite.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .userYellow .icon {
   background-image: url('./img/icon/userYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 
 .writeYellow .icon {
   background-image: url('./img/icon/writeYellow.png');
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 80%;
   background-position: center;
 }
 </style>

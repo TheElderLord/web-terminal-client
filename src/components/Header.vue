@@ -62,7 +62,7 @@ export default {
 
 .logo{
     
-    background: url('../assets/logo.png') no-repeat;
+    background: url('../assets/icons/logo.png') no-repeat;
     background-size: 40%;
     background-position: center;
 }

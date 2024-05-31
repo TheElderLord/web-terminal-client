@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import IIN_Input from '../views/IIN_Input.vue';
+import IINScaner from '../views/IINScaner.vue';
 import Phone_Num from '../views/Phone_Num.vue';
 
 import Index from '../views/Index.vue';
@@ -22,6 +23,7 @@ import Messages from '../views/Messages.vue'
 import PrintTicket from '../views/PrintTicket.vue';
 import Slide from '../views/Slide.vue';
 import ChangerLang from '../views/ChangerLang.vue';
+
 
 
 
@@ -76,6 +78,13 @@ const router = createRouter({
       path: '/print',
       name: 'print-ticket',
       component: PrintTicket,
+      props: true
+
+    },
+    {
+      path: '/iin-scaner',
+      name: 'iin-scaner',
+      component: IINScaner,
       props: true
 
     },

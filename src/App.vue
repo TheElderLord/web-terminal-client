@@ -48,7 +48,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="">
     <div class="header">
       <Header />
     </div>

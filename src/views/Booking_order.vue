@@ -46,7 +46,7 @@ export default {
         return
       } else {
         try {
-          const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/get-book`, {
+          const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/booking/get-book`, {
             bookCode: this.booking_code,
             local: this.getLang()
           })

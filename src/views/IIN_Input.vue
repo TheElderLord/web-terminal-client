@@ -145,30 +145,30 @@ export default {
   },
   mounted() {
     this.$refs.iininput.focus()
-    document.addEventListener('keydown', (e) => {
-      try {
-        switch (e.key) {
-          case 'Backspace':
-            this.delNum()
-            break
-          case 'Enter':
-            console.log(this.IIN)
-            this.submit()
-            break
-          default:
-            this.IIN = this.IIN.replace(/[^0-9]/g, '')
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    })
-    if(slide_show === "true"){
-    document.addEventListener('mousemove', this.resetIdleTimer);
-    document.addEventListener('keydown', this.resetIdleTimer);
+    // document.addEventListener('keydown', (e) => {
+    //   try {
+    //     switch (e.key) {
+    //       case 'Backspace':
+    //         this.delNum()
+    //         break
+    //       case 'Enter':
+    //         console.log(this.IIN)
+    //         this.submit()
+    //         break
+    //       default:
+    //         this.IIN = this.IIN.replace(/[^0-9]/g, '')
+    //     }
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // })
+    // if(slide_show === "true"){
+    // document.addEventListener('mousemove', this.resetIdleTimer);
+    // document.addEventListener('keydown', this.resetIdleTimer);
 
-    // Start the initial idle timer
-    this.resetIdleTimer();
-    }
+    // // Start the initial idle timer
+    // this.resetIdleTimer();
+    // }
   },
   beforeUnmount() {
     // Remove event listeners when the component is destroyed to prevent memory leaks
@@ -184,7 +184,7 @@ export default {
   <div class="md:container md:mx-auto p-3">
     <div class="numpad text-center w-3/5 md:mx-auto bg-white bg-opacity-20 rounded-lg p-3">
       <div class="numpadHeader text-center m-3">
-        <h1 class="text-white text-2xl m-3">
+        <h1 class="text-black text-2xl m-3">
           {{
             getLang() === 'kz'
               ? 'ЖСН енгізіңіз'
@@ -198,6 +198,7 @@ export default {
           type="text"
           name="IIN"
           id="IINInp"
+        
           class="w-full h-12 rounded-md text-xl text-black text-center"
           v-model="IIN"
           maxlength="12"
@@ -213,35 +214,35 @@ export default {
         </div>
       </div>
       <div class="grid grid-cols-3 gap-4">
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(1)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(1)">
           1
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(2)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(2)">
           2
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(3)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(3)">
           3
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(4)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(4)">
           4
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(5)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(5)">
           5
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(6)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(6)">
           6
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(7)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(7)">
           7
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(8)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(8)">
           8
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(9)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(9)">
           9
         </div>
         <div
-          class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white flex items-center justify-center"
+          class="keys h-20 py-6  rounded-lg text-2xl text-white flex items-center justify-center"
           @click="delNum()"
         >
           <svg
@@ -259,10 +260,10 @@ export default {
             />
           </svg>
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(0)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(0)">
           0
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="submit()">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="submit()">
           OK
         </div>
       </div>
@@ -270,13 +271,13 @@ export default {
 
     <div class="md:container md:mx-auto text-white mt-3 flex justify-center">
       <!-- <div class="keys flex items-center justify-center m-4">
-                <div @click="inputFocus()" class="text-center  bg-yellow-600  text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
+                <div @click="inputFocus()" class="text-center    text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
                     "ru"
                     ? "Сканировать ИИН" : "Scan the IIN" }}</div>
             </div> -->
 
-      <div class="keys flex items-center justify-center m-4">
-        <div class="text-center w-full bg-yellow-600 text-xl p-5 rounded-lg" @click="goRating()">
+      <!-- <div class="keys flex items-center justify-center m-4">
+        <div class="text-center w-full  text-xl p-5 rounded-lg" @click="goRating()">
           {{
             getLang() === 'kz'
               ? 'Қызмет көрсету сапасын бағалау'
@@ -287,12 +288,12 @@ export default {
         </div>
       </div>
       <div class="keys flex items-center justify-center m-4">
-        <div class="text-center w-full bg-yellow-600 text-xl p-5 rounded-lg" @click="goBooking()">
+        <div class="text-center w-full  text-xl p-5 rounded-lg" @click="goBooking()">
           {{
             getLang() === 'kz' ? 'Броньдау' : getLang() === 'ru' ? 'Бронирование' : 'Reservation'
           }}
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -301,6 +302,10 @@ export default {
 <style  scoped>
 .keys {
   cursor: pointer;
+  background-color: #00BB00;;
+}
+.numpadHeader input{
+  border: 1px solid black;
 }
 </style>
 

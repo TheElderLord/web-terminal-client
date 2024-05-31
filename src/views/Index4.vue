@@ -36,7 +36,7 @@ export default {
         },
         async getServices() {
             // console.log(branchId)
-            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`,{
+            const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services`,{
                 branchId:BRANCH_ID, 
                 queueId:this.getQueueId()
             });

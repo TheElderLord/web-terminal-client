@@ -34,7 +34,7 @@ export default {
     },
     async print() {
       try {
-        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services/print`, {
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/print`, {
           local: this.getLang(),
           // local: 'ru',
           soapBody: this.resp,

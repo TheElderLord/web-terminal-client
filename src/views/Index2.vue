@@ -36,7 +36,7 @@ export default {
     },
     async getServices() {
       try {
-        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`, {
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services`, {
           branchId: BRANCH_ID,
           queueId: this.getQueueId()
         })
@@ -88,7 +88,7 @@ export default {
             // console.log(body);
 
             const response = await axios.post(
-              `http://${SERVER_HOST}:${SERVER_PORT}/services/event-now`,
+              `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
               body
             )
             console.log('Response', response)
@@ -172,15 +172,15 @@ export default {
 .icon {
   padding: 0.2rem;
 }
-.paper .icon {
-  background-image: url('./img/icon/paper.png');
+.accounts .icon {
+  background-image: url('../assets/icon/accounts.png');
   background-repeat: no-repeat;
   background-size: 70%;
   background-position: center;
 }
 
-.paperYellow .icon {
-  background-image: url('./img/icon/paperYellow.png');
+.add-deposit .icon {
+  background-image: url('../assets/icon/add_deposit.png');
   background-repeat: no-repeat;
   background-size: 60%;
   background-position: center;

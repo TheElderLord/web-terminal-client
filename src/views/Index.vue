@@ -41,7 +41,7 @@ export default {
     async getServices() {
       try {
         // console.log(branchId)
-        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/services`, {
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services`, {
           branchId: BRANCH_ID,
           queueId: '?',
         })
@@ -75,7 +75,7 @@ export default {
         ) {
           this.setBranchId(BRANCH_ID)
           this.setQueueId(service.queueId[0])
-          this.$router.push('/iin')
+          this.$router.push('/iin-scaner')
           // this.$router.push('/index2')
           return
         } else {
@@ -98,7 +98,7 @@ export default {
             // console.log(body);
 
             const response = await axios.post(
-              `http://${SERVER_HOST}:${SERVER_PORT}/services/event-now`,
+              `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
               body,
             )
             console.log('Response', response)
@@ -127,7 +127,7 @@ export default {
       } else this.$router.push('/')
     },
     detectService(service) {
-      console.log(service.cssclass[0])
+      // console.log(service.cssclass[0])
       if (service.cssclass[0].includes('red')) {
         return {
           backgroundColor: 'red', // Set your desired style here
@@ -169,24 +169,18 @@ export default {
 </script>
 <template>
   <div class="md:container mx-auto">
-    <div class="services  mt-16">
+    <div class="services  ">
       <div v-for="service in services" :key="service.id" @click="goNext(service)" :style="detectService(service)"
-        class="service text-white rounded-lg flex items-center justify-center basis-5/12 m-2"
+        class="service text-white rounded-lg flex items-center justify-center  m-2 "
         :class="service.cssclass[0]">
 
-        <div class="serviceName text-center basis-4/5 text-2xl">
+        <div class="serviceName text-center ">
           {{ getFormatService(service.workName[0]) }}
         </div>
       </div>
-      <div @click="goNext(service)"
-        class="service text-white rounded-lg flex items-center justify-center basis-5/12 m-2">
-
-        <div class="serviceName text-center basis-4/5 text-2xl">
-          ыфлтвфыл
-        </div>
-      </div>
+    
       <div @click="goBack()"
-        class="book text-white text-xl  rounded-lg flex items-center justify-center mx-0 basis-5/12 w-1/4">
+        class="book text-white text-xl  rounded-lg flex items-center justify-center mx-auto basis-5/12 w-1/4">
         <div class="icon basis-1/5 h-full flex items-center justify-center p-4"><i class="bi bi-ticket"></i></div>
         <div class="text-center basis-4/5">
           {{ getLang() == 'kz' ? 'Брондагы талонды алу' : getLang() == 'ru' ? 'Получения талона по онлайн-брони' :
@@ -203,7 +197,8 @@ export default {
       <div class="backButton">
         <button class="rounded-lg" @click="goBack()">
           <i class="bi bi-arrow-return-left"></i>
-          <span class="px-4">На главную</span>
+          <span class="px-4"> {{ getLang() == 'kz' ? 'Басты бетке' : getLang() == 'ru' ? 'На главную' :
+            'To main' }}</span>
         </button>
       </div>
     </div>
@@ -215,7 +210,7 @@ export default {
 
   padding: 1rem;
   background-color: #00BB00;
-  font-size: 75px;
+  
 
   .icon {
     width: 100%;
@@ -226,6 +221,7 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
+    font-size: 70px;
     justify-content: center;
     align-items: center;
   }
@@ -233,7 +229,6 @@ export default {
 
 .book {
   cursor: pointer;
-
   background-color: #00BB00;
   font-size: 33px;
 

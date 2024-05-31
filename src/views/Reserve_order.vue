@@ -71,7 +71,7 @@ export default {
     async getDays() {
       try {
         this.days = []
-        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/days`, {
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/booking/days`, {
           branchId: branchId,
         })
         this.days.push(response.data[0])
@@ -94,7 +94,7 @@ export default {
       }
       // console.log(body)
       try {
-        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/booking/time`, body)
+        const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/booking/time`, body)
 
         this.slots = response.data
         this.slots.shift()

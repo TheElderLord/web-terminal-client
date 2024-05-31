@@ -48,7 +48,7 @@ export default {
         return
       } else {
         try {
-          const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/rate/check`, {
+          const result = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/rate/check`, {
             ordernum: this.book_code,
             branchId: branchId
           })

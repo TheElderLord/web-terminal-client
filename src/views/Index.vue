@@ -75,7 +75,8 @@ export default {
         ) {
           this.setBranchId(BRANCH_ID)
           this.setQueueId(service.queueId[0])
-          this.$router.push('/index2')
+          this.$router.push('/iin')
+          // this.$router.push('/index2')
           return
         } else {
           // this.setBranchId(BRANCH_ID)
@@ -168,26 +169,28 @@ export default {
 </script>
 <template>
   <div class="md:container mx-auto">
-    <div class="services flex justify-center flex-wrap flex-row mt-24">
-      <div
-        v-for="service in services"
-        :key="service.id"
-        @click="goNext(service)"
-        :style="detectService(service)"
+    <div class="services  mt-16">
+      <div v-for="service in services" :key="service.id" @click="goNext(service)" :style="detectService(service)"
         class="service text-white rounded-lg flex items-center justify-center basis-5/12 m-2"
-        :class="service.cssclass[0]"
-      >
-        <div class="icon basis-1/5 "></div>
+        :class="service.cssclass[0]">
+
         <div class="serviceName text-center basis-4/5 text-2xl">
           {{ getFormatService(service.workName[0]) }}
         </div>
       </div>
-      <div
-        @click="goBack()"
-        class="service text-white text-xl bg-yellow-600 rounded-lg flex items-center justify-center basis-5/12 py-4 m-2"
-      >
-        <div class="text-center">
-          {{ getLang() == 'kz' ? 'Артқа' : getLang() == 'ru' ? 'Назад' : 'Back' }}
+      <div @click="goNext(service)"
+        class="service text-white rounded-lg flex items-center justify-center basis-5/12 m-2">
+
+        <div class="serviceName text-center basis-4/5 text-2xl">
+          ыфлтвфыл
+        </div>
+      </div>
+      <div @click="goBack()"
+        class="book text-white text-xl  rounded-lg flex items-center justify-center mx-0 basis-5/12 w-1/4">
+        <div class="icon basis-1/5 h-full flex items-center justify-center p-4"><i class="bi bi-ticket"></i></div>
+        <div class="text-center basis-4/5">
+          {{ getLang() == 'kz' ? 'Брондагы талонды алу' : getLang() == 'ru' ? 'Получения талона по онлайн-брони' :
+          'Back' }}
         </div>
       </div>
 
@@ -196,25 +199,61 @@ export default {
                 <div class="text-center">{{ getLang() === "kz" ? "Kazakh" : getLang() === "ru" ? "Russia" :"England" }}</div>
             </div> -->
     </div>
+    <div class="footer">
+      <div class="backButton">
+        <button class="rounded-lg" @click="goBack()">
+          <i class="bi bi-arrow-return-left"></i>
+          <span class="px-4">На главную</span>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
-
 .service {
   cursor: pointer;
-  height: 150px;
+
   padding: 1rem;
-  .icon{
-      width: 100%;
-      height: 100%;
+  background-color: #00BB00;
+  font-size: 75px;
+
+  .icon {
+    width: 100%;
+    height: 100%;
   }
-  .serviceName{
+
+  .serviceName {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+}
+
+.book {
+  cursor: pointer;
+
+  background-color: #00BB00;
+  font-size: 33px;
+
+  .icon {
+    background-color: #033dff;
+  }
+}
+
+.backButton {
+  button {
+    color: #00BB00;
+
+    padding: 1rem;
+    font-size: 32px;
+
+    i {
+      color: blue;
+    }
+  }
+
 }
 
 .paper .icon {

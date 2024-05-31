@@ -1,4 +1,3 @@
-
 <template>
 
    
@@ -12,7 +11,7 @@
             : getLang() === "ru" ? "Комитет Государственных Доходов Министерства финансов Республики Казахстан" 
             :"State Revenue Committee Ministry of Finance of the Republic of Kazakhstan" }}</div> 
         </div>
-        <div class="langs text-white  h-full flex justify-between basis-1/6" >
+        <!-- <div class="langs text-white  h-full flex justify-between basis-1/6" >
             <div class="lang  h-full   flex items-center justify-center mx-1" @click='setLang("kz")'>
                 <div class="text-center  bg-yellow-600  py-4 px-5 ">KZ</div>
             </div>
@@ -22,7 +21,7 @@
             <div class="lang  h-full  flex items-center justify-center mx-1" @click='setLang("eng")'>
                 <div class="text-center  bg-yellow-600 py-4 px-5">ENG</div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </template>
@@ -63,7 +62,7 @@ export default {
 .logo{
     
     background: url('../assets/icons/logo.png') no-repeat;
-    background-size: 40%;
+    background-size: 100%;
     background-position: center;
 }
 .lang{

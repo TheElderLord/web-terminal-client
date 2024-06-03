@@ -145,35 +145,35 @@ export default {
         </div>
       </div>
       <div class="grid grid-cols-3 gap-5">
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(1)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(1)">
           1
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(2)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(2)">
           2
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(3)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(3)">
           3
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(4)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(4)">
           4
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(5)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(5)">
           5
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(6)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(6)">
           6
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(7)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(7)">
           7
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(8)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(8)">
           8
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(9)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(9)">
           9
         </div>
         <div
-          class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white flex items-center justify-center"
+          class="keys h-20 py-6  rounded-lg text-2xl text-white flex items-center justify-center"
           @click="delNum()"
         >
           <svg
@@ -191,17 +191,17 @@ export default {
             />
           </svg>
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="addNum(0)">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(0)">
           0
         </div>
-        <div class="keys h-20 py-6 bg-yellow-600 rounded-lg text-2xl text-white" @click="submit()">
+        <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="submit()">
           OK
         </div>
       </div>
     </div>
     <div class="md:container md:mx-auto text-white mt-2 flex justify-center">
       <div class="keys flex items-center justify-center m-4">
-        <div class="text-center bg-yellow-600 text-2xl p-5 w-64 rounded-lg" @click="goBack()">
+        <div class="text-center  text-2xl p-5 w-64 rounded-lg" @click="goBack()">
           {{
             getLang() == 'kz' ? 'Басты бет' : getLang() == 'ru' ? 'Главная страница' : 'Main page'
           }}
@@ -214,5 +214,6 @@ export default {
 <style scoped>
 .keys {
   cursor: pointer;
+  background-color: #00BB00;;
 }
 </style>

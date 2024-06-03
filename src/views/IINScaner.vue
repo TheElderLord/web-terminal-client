@@ -1,11 +1,12 @@
 <script>
 import { useStateStore } from '../store'
 export default {
-    data(){
-        return{
-            scannerInput:""
+    data() {
+        return {
+            IIN: "",
+            error: false
         }
-        
+
     },
     setup() {
         const stateStore = useStateStore()
@@ -14,22 +15,75 @@ export default {
         }
     },
     methods: {
+        validateIIN(iin) {
+            // Regular expression for a 12-digit number
+            const iinRegex = /^\d{12}$/
+
+            if (!iinRegex.test(iin)) {
+                return false
+            }
+
+            const year = parseInt(iin.substr(0, 2), 10)
+            const month = parseInt(iin.substr(2, 2), 10)
+            const day = parseInt(iin.substr(4, 2), 10)
+            //   console.log(year, month, day)
+            // Validate date of birth
+            if (year < 0 || year > 99 || month < 1 || month > 12 || day < 1 || day > 31) {
+                return false
+            }
+            return true
+
+
+        },
         getLang() {
             console.log(this.stateStore.get_lang)
             return this.stateStore.get_lang;
         },
-        manualIInPage(){
+        manualIInPage() {
             this.$router.push("/iin")
         },
-        goMain(){
-            this.stateStore.set_iin(this.scannerInput);
+        goMain() {
+            this.stateStore.set_iin(this.IIN);
             this.$router.push('/')
         },
-        clearForm(){
-           this.scannerInput = "";
-        }
+        clearForm() {
+            this.IIN = "";
+        },
+        submit() {
+            try {
+                if (this.IIN.length !== 12 || !this.validateIIN(this.IIN)) {
+                    this.error = true
+                    return
+                }
+
+                if (this.IIN.length !== 12) {
+                    this.error = true
+                    return
+                }
+                this.error = true
+                this.setIIN
+                this.$router.push('/index2')
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        isCorrect() {
+            if ((this.IIN.length > 0 && this.IIN.length < 12) || this.IIN.length > 12) {
+                return false
+            } else if (this.error) {
+                return false
+            }
+            return true
+        },
+        setIIN() {
+            try {
+                this.stateStore.set_iin(this.IIN)
+            } catch (err) {
+                return console.log(err)
+            }
+        },
     },
-    mounted(){
+    mounted() {
         document.getElementById("scannerInput").focus()
     }
 }
@@ -44,28 +98,39 @@ export default {
         </div>
         <div class="body ">
             <div class="form ">
-               
-                    <div class="form-container ">
-                        <div class="iin-input">
-                            <input v-model="scannerInput" id="scannerInput" :placeholder="getLang() == 'kz' ? 'Штрих-кодты сканерлеңіз' : getLang() == 'ru' ? 'Отсканируйте штрих-код' :
+
+                <div class="form-container ">
+                    <div class="iin-input">
+                        <input v-model="IIN" id="scannerInput" :placeholder="getLang() == 'kz' ? 'Штрих-кодты сканерлеңіз' : getLang() == 'ru' ? 'Отсканируйте штрих-код' :
                             'Submit'" class="p-2" type="text">
+                        <div v-if="!isCorrect()" class="error-text text-red-500 text-xl mt-2 mb-0 p-0">
+                            {{
+                                getLang() === 'kz'
+                                    ? 'Дұрыс емес ЖСН'
+                                    : getLang() === 'ru'
+                                        ? 'Неправильный ИИН'
+                                        : 'Invalid IIN'
+                            }}
                         </div>
-                       <div @click="clearForm()" class="iin-image cursor-pointer">
-                        <img src="../assets/icons/delete.png" alt="">
-                       </div>
-                      
                     </div>
-                    <div class="submitBut">
-                        {{ getLang() == 'kz' ? 'Растау' : getLang() == 'ru' ? 'Подтвердить' :
-                            'Submit' }}
+                    <div @click="clearForm()" class="iin-image cursor-pointer">
+                        <img src="../assets/icons/delete.png" alt="">
                     </div>
 
-                
-               
+                </div>
+                <div @click="submit()" class="submitBut cursor-pointer">
+                    {{ getLang() == 'kz' ? 'Растау' : getLang() == 'ru' ? 'Подтвердить' :
+                        'Submit' }}
+                </div>
+
+
+
                 <div class="footer text-black text-center p-4 ">
-                    <p class="font-bold">{{ getLang() === "kz" ? `"Растау" батырмасын басу арқылы мен жинауға келісімімді беремін,
+                    <p class="font-bold">{{ getLang() === "kz" ? `"Растау" батырмасын басу арқылы мен жинауға
+                        келісімімді беремін,
                         өңдеу
-                        оның қызметтері бойынша кеңес алу мақсатында менің дербес деректерім` : `Нажимая кнопку "Подтвердить", я даю свое согласие на сбор,
+                        оның қызметтері бойынша кеңес алу мақсатында менің дербес деректерім` : `Нажимая кнопку
+                        "Подтвердить", я даю свое согласие на сбор,
                         обработку
                         моих персональных данных с целью получения консультации по его услугам`}}</p>
                 </div>
@@ -77,20 +142,21 @@ export default {
         </div>
         <div class="footer flex justify-around">
             <div @click="goMain()" class="backButton w-1/3 text-center cursor-pointer">
-                    
+
                 <div class="text">
                     <i class="bi bi-arrow-return-left text-3xl text-blue-600"></i>
                     На главную
                 </div>
             </div>
             <div class="arrowDown w-1/3 text-center">
-               <div class="text">
-                Сканер штрих-кода
-               </div>
-               <i class="bi bi-chevron-down font-bold text-5xl text-blue-600"></i>
-               
+                <div class="text">
+                    Сканер штрих-кода
+                </div>
+                <i class="bi bi-chevron-down font-bold text-5xl text-blue-600"></i>
+
             </div>
-            <div @click="manualIInPage()" class="manual w-1/3 text-center flex justify-center items-center cursor-pointer">
+            <div @click="manualIInPage()"
+                class="manual w-1/3 text-center flex justify-center items-center cursor-pointer">
                 Ручной ввод ИИН
             </div>
         </div>
@@ -113,29 +179,30 @@ export default {
     .form {
         width: 100%;
         height: 100%;
-        
-    
 
-            .form-container {
-                width: fit-content;
-                margin: 0 auto;
-                display: flex;
-                .iin-input{
-                    input {
-                        width: 24rem;
-                        height: 100%;
-                        margin: 0 auto;
-                        border: 1px solid black;
-                    }
+
+
+        .form-container {
+            width: fit-content;
+            margin: 0 auto;
+            display: flex;
+
+            .iin-input {
+                input {
+                    width: 24rem;
+                    height: 100%;
+                    margin: 0 auto;
+                    border: 1px solid black;
                 }
-               
             }
 
+        }
 
-        
+
+
 
         .submitBut {
-          
+
             width: fit-content;
             margin: 4rem auto 0 auto;
             padding: .5rem;
@@ -155,29 +222,32 @@ export default {
         align-items: center;
     }
 }
-.footer{
+
+.footer {
     color: #00BB00;
-    
-    .backButton{
-        .text{
+
+    .backButton {
+        .text {
             font-size: 25px;
             font-weight: 700;
         }
-        
+
     }
-    .arrowDown{
-        .text{
+
+    .arrowDown {
+        .text {
             font-size: 32px;
             font-weight: 700;
         }
-       
+
     }
-   .manual{
-    
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    background-color: #00BB00;
-   }
+
+    .manual {
+
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: #00BB00;
+    }
 }
 </style>

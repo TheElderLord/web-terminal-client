@@ -73,7 +73,7 @@ export default {
     </div>
     <div class="buttonDiv">
       <div
-        class="rate text-white bg-yellow-600 py-5 mx-auto rounded-xl text-xl font-bold mt-15 text-center"
+        class="rate text-white 0 py-5 mx-auto rounded-xl text-xl font-bold mt-15 text-center"
         @click="goBack()"
       >
         {{ getLang() === 'kz' ? 'Басты бет' : getLang() === 'ru' ? 'На главную' : 'To main page' }}
@@ -81,3 +81,8 @@ export default {
     </div>
   </main>
 </template>
+<style lang="scss" scoped>
+.rate{
+  background-color: #00BB00;;
+}
+</style>

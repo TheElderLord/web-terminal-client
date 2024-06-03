@@ -172,7 +172,7 @@ export default {
     <div class="services  ">
       <div v-for="service in services" :key="service.id" @click="goNext(service)"
         class="service text-white rounded-lg flex items-center justify-center  m-2 " :class="service.cssclass[0]">
-      <div div class="icon"></div>
+     
         <div class="serviceName text-center ">
           {{ getFormatService(service.workName[0]) }}
         </div>

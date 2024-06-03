@@ -155,7 +155,7 @@ beforeUnmount() {
             </div> -->
     </div>
     <div
-      class="rate text-white bg-yellow-600 py-5 mx-auto rounded-xl text-xl font-bold mt-15 text-center"
+      class="rate text-white  py-5 mx-auto rounded-xl text-xl font-bold mt-15 text-center"
       @click="goBack()"
     >
       {{ getLang() === 'kz' ? 'Басты бет' : getLang() === 'ru' ? 'На главную' : 'To main page' }}
@@ -166,6 +166,7 @@ beforeUnmount() {
 <style scoped>
 .rate {
   cursor: pointer;
+  background-color: #00BB00;;
 }
 
 .selected {

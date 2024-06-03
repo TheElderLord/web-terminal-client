@@ -94,11 +94,11 @@ export default {
       </div>
     </div>
     <div class="buttons w-2/5 mx-auto mt-8">
-      <div class="button text-white text-3xl bg-yellow-600 my-4 py-5 rounded-lg" @click="print()">
+      <div class="button text-white text-3xl  my-4 py-5 rounded-lg" @click="print()">
         {{ getLang() === 'kz' ? 'Басып шығару' : getLang() === 'ru' ? 'Распечатать' : 'Print' }}
       </div>
       <div
-        class="button text-white text-3xl bg-yellow-600 my-4 py-5 rounded-lg"
+        class="button text-white text-3xl  my-4 py-5 rounded-lg"
         @click="getStart()"
       >
         {{
@@ -112,5 +112,6 @@ export default {
 <style scoped>
 .button {
   cursor: pointer;
+  background-color: #00BB00;;
 }
 </style>

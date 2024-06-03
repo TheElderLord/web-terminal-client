@@ -2,7 +2,7 @@
 import { useStateStore } from '../store'
 
 const iin_val = import.meta.env.VITE_SERVER_IIN_VALID
-const slide_show = import.meta.env.VITE_SERVER_SLIDE
+// const slide_show = import.meta.env.VITE_SERVER_SLIDE
 const idleTimeout = import.meta.env.VITE_SERVER_IDLE_TIMER
 // const idleTimeout = "false"
 
@@ -84,7 +84,7 @@ export default {
       //     return
       //   }
       try {
-        const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
+        // const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
         // if (this.IIN !== "020214501513") {
         //     this.error = true;
         //     return;
@@ -106,11 +106,12 @@ export default {
         // console.log(phone_req === "true")
         this.error = true
         this.setIIN
-        if (phone_req == 'true') {
-          this.$router.push('/phone')
-        } else {
-          this.$router.push('/')
-        }
+        // if (phone_req == 'true') {
+        //   this.$router.push('/phone')
+        // } else {
+        //   this.$router.push('/')
+        // }
+        this.$router.push('/index2')
       } catch (err) {
         console.log(err)
       }
@@ -142,6 +143,9 @@ export default {
         this.$router.push('/slide'); // Replace with your desired route
       }, idleTimeout);
     },
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    }
   },
   mounted() {
     this.$refs.iininput.focus()
@@ -270,6 +274,8 @@ export default {
     </div>
 
     <div class="md:container md:mx-auto text-white mt-3 flex justify-center">
+
+      <button @click="goBack()" class="keys p-4 rounded-lg text-xl font-bold">Назад</button>
       <!-- <div class="keys flex items-center justify-center m-4">
                 <div @click="inputFocus()" class="text-center    text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
                     "ru"

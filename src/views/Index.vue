@@ -66,12 +66,12 @@ export default {
       }
     },
     async goNext(service) {
-      // console.log(service)
+       console.log(service)
       try {
         if (
-          service.maxServTime === ' ' ||
-          service.maxServTime === null ||
-          service.maxServTime === undefined
+          service.maxServTime[0] === '' ||
+          service.maxServTime[0] === null ||
+          service.maxServTime[0] === undefined
         ) {
           this.setBranchId(BRANCH_ID)
           this.setQueueId(service.queueId[0])
@@ -170,21 +170,20 @@ export default {
 <template>
   <div class="md:container mx-auto">
     <div class="services  ">
-      <div v-for="service in services" :key="service.id" @click="goNext(service)" :style="detectService(service)"
-        class="service text-white rounded-lg flex items-center justify-center  m-2 "
-        :class="service.cssclass[0]">
-
+      <div v-for="service in services" :key="service.id" @click="goNext(service)"
+        class="service text-white rounded-lg flex items-center justify-center  m-2 " :class="service.cssclass[0]">
+      <div div class="icon"></div>
         <div class="serviceName text-center ">
           {{ getFormatService(service.workName[0]) }}
         </div>
       </div>
-    
+
       <div @click="goBack()"
-        class="book text-white text-xl  rounded-lg flex items-center justify-center mx-auto basis-5/12 w-1/4">
-        <div class="icon basis-1/5 h-full flex items-center justify-center p-4"><i class="bi bi-ticket"></i></div>
-        <div class="text-center basis-4/5">
+        class="book text-white text-lg  rounded-lg flex items-center justify-center mx-auto basis-5/12 w-1/4">
+        <div class="icon  h-full flex items-center justify-center p-4"><i class="bi bi-ticket"></i></div>
+        <div class="text-center">
           {{ getLang() == 'kz' ? 'Брондагы талонды алу' : getLang() == 'ru' ? 'Получения талона по онлайн-брони' :
-          'Back' }}
+            'Back' }}
         </div>
       </div>
 
@@ -197,7 +196,7 @@ export default {
       <div class="backButton">
         <button class="rounded-lg" @click="goBack()">
           <i class="bi bi-arrow-return-left"></i>
-          <span class="px-4"> {{ getLang() == 'kz' ? 'Басты бетке' : getLang() == 'ru' ? 'На главную' :
+          <span class="p-4"> {{ getLang() == 'kz' ? 'Басты бетке' : getLang() == 'ru' ? 'На главную' :
             'To main' }}</span>
         </button>
       </div>
@@ -210,7 +209,7 @@ export default {
 
   padding: 1rem;
   background-color: #00BB00;
-  
+
 
   .icon {
     width: 100%;
@@ -230,7 +229,8 @@ export default {
 .book {
   cursor: pointer;
   background-color: #00BB00;
-  font-size: 33px;
+  font-size: 30px;
+  
 
   .icon {
     background-color: #033dff;
@@ -242,7 +242,7 @@ export default {
     color: #00BB00;
 
     padding: 1rem;
-    font-size: 32px;
+    font-size: 30px;
 
     i {
       color: blue;

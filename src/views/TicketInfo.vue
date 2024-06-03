@@ -72,15 +72,15 @@ export default {
 }
 </script>
 <template>
-  <div class="md:container mx-auto p-4 text-center bg-white bg-opacity-10">
+  <div class="md:container mx-auto p-4 text-center  bg-opacity-10">
     <div v-if="resp" class="infos w-3/5 mx-auto rounded-lg p-5">
-      <div class="info text-white flex justify-center items-center py-3">
+      <div class="info text-black flex justify-center items-center py-3">
         <div class="in text-center text-5xl leading-normal">{{ resp['cus:ticketno'][0] }}</div>
       </div>
-      <div class="info text-white flex justify-center items-center py-3">
+      <div class="info text-black flex justify-center items-center py-3">
         <div class="in text-center text-2xl leading-normal">{{ resp['cus:servicename'][0] }}</div>
       </div>
-      <div class="info text-white flex justify-center items-center py-3">
+      <div class="info text-black flex justify-center items-center py-3">
         <div class="in text-center text-2xl leading-normal">
           {{
             getLang() == 'kz'

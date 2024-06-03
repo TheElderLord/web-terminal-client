@@ -75,9 +75,16 @@ export default {
                 <div class="text-center">{{ getLang() === "kz" ? "Kazakh" : getLang() === "ru" ? "Russia" :"England" }}</div>
             </div> -->
         </div>
-        <div class="footer">
-            <div class="queueFree">
-
+        <div class="footer mt-5">
+            <div class="queueFree float-start flex">
+                <div class="icon flex justify-center items-center">
+                    <i class="bi bi-person-wheelchair text-3xl"></i>
+                </div>
+                
+                <div class="text px-4">
+                    Кезектен тыс <br>
+                    Без очереди
+                </div>
             </div>
         </div>
     </div>
@@ -97,5 +104,12 @@ export default {
     margin: 1rem auto;
 
    
+}
+.queueFree{
+    background-color: #00BB00;
+    color: white;
+    padding: .5rem;
+    font-size: 24px;
+    border-radius: 1rem;
 }
 </style>

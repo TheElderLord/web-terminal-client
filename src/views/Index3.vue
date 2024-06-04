@@ -70,7 +70,8 @@ export default {
         if (
           service.maxServTime[0] === '' ||
           service.maxServTime[0] === null ||
-          service.maxServTime[0] === undefined
+          service.maxServTime[0] === undefined ||
+          service.maxServTime[0] === '#max_serv_time#'
         ) {
           this.setBranchId(BRANCH_ID)
           this.setQueueId(service.queueId[0])

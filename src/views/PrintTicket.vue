@@ -25,7 +25,7 @@ export default {
         // Clear the interval if the condition is met
         clearInterval(this.checkRouteInterval)
       }
-    }, 24000)
+    }, 4000)
   },
   beforeUnmount() {
     // Clear the interval when the component is about to be unmounted
@@ -40,3 +40,8 @@ export default {
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+.container{
+  background-color: rgb(232, 234, 235);
+}
+</style>

@@ -4,8 +4,6 @@ import { useStateStore } from '../store'
 import { SERVER_HOST } from '../constants'
 import { SERVER_PORT } from '../constants'
 
-const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
-const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
 export default {
   data() {
     return {
@@ -82,11 +80,8 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     goMain() {
-      if (iin_req === 'true') {
-        this.$router.push('/iin')
-      } else if (phone_req === 'true') {
-        this.$router.push('/phone')
-      } else this.$router.push('/')
+     
+    this.$router.push('/')
     }
   },
   mounted() {
@@ -122,9 +117,9 @@ export default {
 </script>
 <template>
   <div class="md:container md:mx-auto p-5">
-    <div class="numpad text-center w-3/5 md:mx-auto bg-white bg-opacity-20 rounded-lg p-5">
+    <div class="numpad text-center w-full md:mx-auto  bg-opacity-20 rounded-lg p-5">
       <div class="numpadHeader text-center m-8">
-        <h1 class="text-white text-4xl m-5">
+        <h1 class="text-black text-4xl m-5">
           {{
             getLang() === 'kz'
               ? 'Броньдау кодын енгізіңіз'
@@ -137,7 +132,7 @@ export default {
           type="text"
           name="IIN"
           id="IINInp"
-          class="w-full h-12 rounded-md text-xl text-center text-black"
+          class="w-full h-24 rounded-md text-xl text-center text-black "
           v-model="booking_code"
         />
         <div v-if="error" class="error-text text-red-500 text-xl mt-4">
@@ -201,7 +196,7 @@ export default {
     </div>
     <div class="md:container md:mx-auto text-white mt-2 flex justify-center">
       <div class="keys flex items-center justify-center m-4">
-        <div class="text-center  text-2xl p-5 w-64 rounded-lg" @click="goBack()">
+        <div class="text-center  text-4xl p-5 w-64 rounded-lg" @click="goMain()">
           {{
             getLang() == 'kz' ? 'Басты бет' : getLang() == 'ru' ? 'Главная страница' : 'Main page'
           }}
@@ -212,8 +207,13 @@ export default {
 </template>
 
 <style scoped>
+input{
+  border: 1px solid black;
+  width: 80%;
+}
 .keys {
   cursor: pointer;
   background-color: #00BB00;;
+  font-size: 43px;
 }
 </style>

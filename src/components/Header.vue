@@ -6,10 +6,10 @@
           
         </div>
         <div class="headerText  h-full  flex items-center justify-center basis-1/2 ">
-           <div class="text-3xl py-6 text-white text-center" > {{ getLang() === "kz" 
+           <!-- <div class="text-3xl py-6 text-white text-center" > {{ getLang() === "kz" 
             ? "Қазақстан Республикасы Қаржы министрлігінің Мемлекеттік Кірістер Комитеті" 
             : getLang() === "ru" ? "Комитет Государственных Доходов Министерства финансов Республики Казахстан" 
-            :"State Revenue Committee Ministry of Finance of the Republic of Kazakhstan" }}</div> 
+            :"State Revenue Committee Ministry of Finance of the Republic of Kazakhstan" }}</div>  -->
         </div>
         <!-- <div class="langs text-white  h-full flex justify-between basis-1/6" >
             <div class="lang  h-full   flex items-center justify-center mx-1" @click='setLang("kz")'>

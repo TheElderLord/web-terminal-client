@@ -4,8 +4,7 @@
                 import { BRANCH_ID } from '../constants'
                 import { SERVER_HOST } from '../constants'
                 import { SERVER_PORT } from '../constants'
-                const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
-                const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
+          
 
                 export default {
                   name: 'index2-page',
@@ -26,15 +25,16 @@
                       this.stateStore.set_branch(branchId)
                     },
                     setQueueId(id) {
-                      this.stateStore.set_queueId(id)
+                      this.stateStore.set_queueId3(id)
                     },
                     getLang() {
                       return this.stateStore.get_lang
                     },
                     getQueueId() {
-                      return this.stateStore.get_queueId
+                      return this.stateStore.get_queueId2
                     },
                     async getServices() {
+                      console.log(this.getQueueId())
                       try {
                         const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services`, {
                           branchId: BRANCH_ID,
@@ -83,25 +83,27 @@
                             const queueId = service.queueId[0]
                             const iin = '?'
                             const local = this.getLang()
-                            const body = {
+                            const requestBody = {
                               branchId: branchId,
                               queueId: queueId,
                               iin: iin,
                               local: local
                             }
+                            this.stateStore.set_request_body(requestBody);
+                            this.$router.push('/ticket-type')
                             // console.log(body);
 
-                            const response = await axios.post(
-                              `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
-                              body
-                            )
-                            console.log('Response', response)
-                            if (response.data.message == 'Success') {
-                              this.setTicketBody(response.data.data)
-                              this.$router.push('/ticket-info')
-                            } else {
-                              console.error('Error in API response:', response.data.message)
-                            }
+                            // const response = await axios.post(
+                            //   `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
+                            //   requestBody
+                            // )
+                            // console.log('Response', response)
+                            // if (response.data.message == 'Success') {
+                            //   this.setTicketBody(response.data.data)
+                            //   this.$router.push('/ticket-info')
+                            // } else {
+                            //   console.error('Error in API response:', response.data.message)
+                            // }
                           } catch (error) {
                             console.error('Error in API request:', error)
                           }
@@ -114,11 +116,7 @@
                       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
                     },
                     goMain() {
-                      if (iin_req === 'true') {
-                        this.$router.push('/iin')
-                      } else if (phone_req === 'true') {
-                        this.$router.push('/phone')
-                      } else this.$router.push('/')
+                       this.$router.push('/')
                     }
                   },
                   mounted() {
@@ -143,11 +141,11 @@
                 }
 </script>
 <template>
-  <div class="md:container mx-auto">
-    <div class="services flex justify-center flex-wrap flex-row mt-24 px-4">
+  <div class="md:container mx-auto w-full h-full">
+    <div class="services flex justify-center flex-wrap flex-row  p-4 w-full h-2/5">
       <div v-for="service in services" :key="service.id" @click="goNext(service)" :class="service.cssclass[0]"
-        class="service text-white text-xl  rounded-lg flex  basis-5/12  m-2">
-        <div class="icon">
+        class="service text-white text-xl  rounded-lg flex  basis-5/12  m-2 h-2/5">
+        <div v-if="service.cssclass[0]!=='' &&  service.cssclass[0]!=='mbutton'" class="icon">
 
         </div>
         <div class="text-center serviceName">{{ getFormatService(service.workName[0]) }}</div>
@@ -180,7 +178,7 @@
         </button>
       </div>
       <div class="backButton">
-        <button class="rounded-lg" @click="goBack()">
+        <button class="rounded-lg" @click="goMain()">
           <i class="bi bi-arrow-return-left"></i>
           <span class="px-4"> {{ getLang() == 'kz' ? 'Басты бетке' : getLang() == 'ru' ? 'На главную' :
             'To main' }}</span>
@@ -193,25 +191,31 @@
 <style lang="scss" scoped>
 .service {
   width: 100%;
-  height: 5rem;
+  
   cursor: pointer;
-
+  line-height: 1;
+  padding: 1rem;
   background-color: #00BB00;
 
 
   .icon {
-    width: 20%;
+    width: 30%;
     height: 100%;
   }
 
   .serviceName {
-    width: 80%;
+    width: 100%;
     height: 100%;
     display: flex;
     font-size: 43px;
     justify-content: center;
     align-items: center;
   }
+}
+
+.footer {
+  position: absolute;
+  top: 85%
 }
 
 .backButton {
@@ -233,200 +237,159 @@
 .accounts .icon {
   background-image: url('../assets/icon/accounts.png');
   background-repeat: no-repeat;
-  background-size: 80%;
+  background-size: 100%;
   background-position: center;
 }
 
 .add-deposit .icon {
   background-image: url('../assets/icon/add_deposit.png');
   background-repeat: no-repeat;
-  background-size: 80%;
+  background-size: 100%;
   background-position: center;
 }
-
-.bars .icon {
-  background-image: url('./img/icon/bars.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.bell .icon {
-  background-image: url('./img/icon/bell.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.bellYellow .icon {
-  background-image: url('./img/icon/bellYellow.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.boxXpaper .icon {
-  background-image: url('./img/icon/boxXpaper.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.calendar .icon {
-  background-image: url('./img/icon/calendar.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.card .icon {
-  background-image: url('./img/icon/card.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.cardYellow .icon {
-  background-image: url('./img/icon/cardYellow');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.checklistYellow .icon {
-  background-image: url('./img/icon/checklistYellow.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.clips .icon {
-  background-image: url('./img/icon/clips.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.loop .icon {
-  background-image: url('./img/icon/loop.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.mech .icon {
-  background-image: url('./img/icon/mech.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.paper2 .icon {
-  background-image: url('./img/icon/paper2.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.paperCheck .icon {
-  background-image: url('./img/icon/paperCheck.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.paperCheckYes .icon {
-  background-image: url('./img/icon/paperCheckYes.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.paperwrite .icon {
-  background-image: url('./img/icon/paperWrite.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.paperX .icon {
-  background-image: url('./img/icon/paperX.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
+.additional .icon {
+  background-image: url('../assets/icon/additional.png');
   background-repeat: no-repeat;
   background-size: 100%;
-}
-
-.paperXpost .icon {
-  background-image: url('./img/icon/paperXpost.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
   background-position: center;
+}
+.cash_op .icon {
+  background-image: url('../assets/icon/cash_op.png');
   background-repeat: no-repeat;
   background-size: 100%;
+  background-position: center;
 }
-
-.phone .icon {
-  background-image: url('./img/icon/phone.png');
+.close_deposit .icon {
+  background-image: url('../assets/icon/close_deposit.png');
   background-repeat: no-repeat;
-  background-size: 80%;
+  background-size: 100%;
+  background-position: center;
+}
+.coins .icon {
+  background-image: url('../assets/icon/coins.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.consult .icon {
+  background-image: url('../assets/icon/consult.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.convert_deposit .icon {
+  background-image: url('../assets/icon/convert_deposit.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.curr_control .icon {
+  background-image: url('../assets/icon/curr_control.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.deposits .icon {
+  background-image: url('../assets/icon/deposits.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.documentary .icon {
+  background-image: url('../assets/icon/documentary.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.eskrou .icon {
+  background-image: url('../assets/icon/eskrou.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.gold .icon {
+  background-image: url('../assets/icon/gold.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.loans .icon {
+  background-image: url('../assets/icon/loans.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.nonalocated .icon {
+  background-image: url('../assets/icon/nonalocated.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.open_depos .icon {
+  background-image: url('../assets/icon/open_depos.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.payment_cards .icon {
+  background-image: url('../assets/icon/payment_cards.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.reorder_deposit .icon {
+  background-image: url('../assets/icon/reorder_deposit.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.safe_cells .icon {
+  background-image: url('../assets/icon/safe_cells.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.safe .icon {
+  background-image: url('../assets/icon/safe.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.save_acc .icon {
+  background-image: url('../assets/icon/save_acc.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.sber_online .icon {
+  background-image: url('../assets/icon/sber_online.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.solve .icon {
+  background-image: url('../assets/icon/solve.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.spravka .icon {
+  background-image: url('../assets/icon/spravka.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.transfers .icon {
+  background-image: url('../assets/icon/transfers.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+.withdraw_deposit .icon {
+  background-image: url('../assets/icon/withdraw_deposit.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
   background-position: center;
 }
 
-.post .icon {
-  background-image: url('./img/icon/post.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.question .icon {
-  background-image: url('./img/icon/question.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.questionYellow .icon {
-  background-image: url('./img/icon/questionYellow.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.tagYellow .icon {
-  background-image: url('./img/icon/tagYellow.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.text .icon {
-  background-image: url('./img/icon/text.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.userWhite .icon {
-  background-image: url('./img/icon/userWhite.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.userYellow .icon {
-  background-image: url('./img/icon/userYellow.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
-
-.writeYellow .icon {
-  background-image: url('./img/icon/writeYellow.png');
-  background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center;
-}
 </style>

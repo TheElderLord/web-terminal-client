@@ -75,13 +75,13 @@ export default {
   <div class="md:container mx-auto p-4 text-center  bg-opacity-10">
     <div v-if="resp" class="infos w-3/5 mx-auto rounded-lg p-5">
       <div class="info text-black flex justify-center items-center py-3">
-        <div class="in text-center text-5xl leading-normal">{{ resp['cus:ticketno'][0] }}</div>
+        <div class="inNum text-center  leading-normal font-bold">{{ resp['cus:ticketno'][0] }}</div>
       </div>
       <div class="info text-black flex justify-center items-center py-3">
-        <div class="in text-center text-2xl leading-normal">{{ resp['cus:servicename'][0] }}</div>
+        <div class="in text-center  leading-normal">{{ resp['cus:servicename'][0] }}</div>
       </div>
       <div class="info text-black flex justify-center items-center py-3">
-        <div class="in text-center text-2xl leading-normal">
+        <div class="in text-center  leading-normal">
           {{
             getLang() == 'kz'
               ? 'Бағалау коды'
@@ -113,5 +113,13 @@ export default {
 .button {
   cursor: pointer;
   background-color: #00BB00;;
+  font-size: 43px;
+  line-height: 1.5;
+}
+.info{
+  font-size: 65px;
+}
+.inNum{
+  font-size: 100px;
 }
 </style>

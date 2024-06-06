@@ -4,8 +4,6 @@ import { useStateStore } from '../store'
 import { BRANCH_ID } from '../constants'
 import { SERVER_HOST } from '../constants'
 import { SERVER_PORT } from '../constants'
-const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED
-const phone_req = import.meta.env.VITE_SERVER_PHONE_REQUIRED
 
 export default {
   name: 'index2-page',
@@ -26,15 +24,16 @@ export default {
       this.stateStore.set_branch(branchId)
     },
     setQueueId(id) {
-      this.stateStore.set_queueId(id)
+      this.stateStore.set_queueId4(id)
     },
     getLang() {
       return this.stateStore.get_lang
     },
     getQueueId() {
-      return this.stateStore.get_queueId
+      return this.stateStore.get_queueId4
     },
     async getServices() {
+      console.log(this.getQueueId())
       try {
         const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services`, {
           branchId: BRANCH_ID,
@@ -82,25 +81,27 @@ export default {
             const queueId = service.queueId[0]
             const iin =  '?'
             const local = this.getLang()
-            const body = {
+            const requestBody = {
               branchId: branchId,
               queueId: queueId,
               iin: iin,
               local: local
             }
+            this.stateStore.set_request_body(requestBody);
+            this.$router.push('/ticket-type')
             // console.log(body);
 
-            const response = await axios.post(
-              `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
-              body
-            )
-            console.log('Response', response)
-            if (response.data.message == 'Success') {
-              this.setTicketBody(response.data.data)
-              this.$router.push('/ticket-info')
-            } else {
-              console.error('Error in API response:', response.data.message)
-            }
+            // const response = await axios.post(
+            //   `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
+            //   body
+            // )
+            // console.log('Response', response)
+            // if (response.data.message == 'Success') {
+            //   this.setTicketBody(response.data.data)
+            //   this.$router.push('/ticket-info')
+            // } else {
+            //   console.error('Error in API response:', response.data.message)
+            // }
           } catch (error) {
             console.error('Error in API request:', error)
           }
@@ -113,11 +114,7 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     goMain() {
-      if (iin_req === 'true') {
-        this.$router.push('/iin')
-      } else if (phone_req === 'true') {
-        this.$router.push('/phone')
-      } else this.$router.push('/')
+      this.$router.push('/')
     }
   },
   mounted() {
@@ -142,14 +139,16 @@ export default {
 }
 </script>
 <template>
-  <div class="md:container mx-auto">
-    <div class="services flex justify-center flex-wrap flex-row mt-24">
+  <div class="md:container mx-auto w-full h-full">
+    <div class="services flex justify-center flex-wrap flex-row w-full h-1/5">
       <div
         v-for="service in services"
         :key="service.id"
         @click="goNext(service)"
         class="service text-white text-xl  rounded-lg flex items-center justify-center basis-5/12 py-4 m-2"
       >
+      <div v-if="service.cssclass[0]!=='' &&  service.cssclass[0]!=='mbutton'" class="icon">
+      </div>
         
         <div class="text-center">{{ getFormatService(service.workName[0]) }}</div>
       </div>
@@ -169,7 +168,7 @@ export default {
         </button>
       </div>
       <div class="backButton">
-        <button class="rounded-lg" @click="goBack()">
+        <button class="rounded-lg" @click="goMain()">
           <i class="bi bi-arrow-return-left"></i>
           <span class="px-4"> {{ getLang() == 'kz' ? 'Басты бетке' : getLang() == 'ru' ? 'На главную' :
             'To main' }}</span>
@@ -185,6 +184,7 @@ export default {
   cursor: pointer;
   background-color: #00BB00;
   font-size: 43px;
+  line-height: 1.5;
 }
 .backButton {
   button {
@@ -199,9 +199,15 @@ export default {
   }
 
 }
+.footer{
+  position: absolute;
+  top:85%
+}
 .icon {
   padding: 0.2rem;
 }
+
+
 .accounts .icon {
   background-image: url('../assets/icon/accounts.png');
   background-repeat: no-repeat;

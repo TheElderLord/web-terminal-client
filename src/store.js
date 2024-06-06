@@ -5,10 +5,14 @@ export const useStateStore = defineStore('store', {
         IIN: '', 
         phone: '',
         branch: '',
-        queueId: '',
+        queueId1: '',
+        queueId2: '',
+        queueId3: '',
+        queueId4: '',
         lang: "kz",
         rating_code: '',
         ticket_body:'',
+        request_body:'',
         message:'Error appeared',
     
 
@@ -27,9 +31,21 @@ export const useStateStore = defineStore('store', {
           
             return state.branch
         },
-        get_queueId(state) {
+        get_queueId1(state) {
           
-            return state.queueId
+            return state.queueId1
+        },
+        get_queueId2(state) {
+          
+            return state.queueId2
+        },
+        get_queueId3(state) {
+          
+            return state.queueId3
+        },
+        get_queueId4(state) {
+          
+            return state.queueId4
         },
         get_lang(state){
             return state.lang
@@ -43,6 +59,9 @@ export const useStateStore = defineStore('store', {
         get_error_message(state){
             return state.message;
         },
+        get_request_body(state){
+            return state.request_body;
+        }
       
 
     },
@@ -57,8 +76,17 @@ export const useStateStore = defineStore('store', {
         set_branch(branch) {
             this.branch = branch
         },
-        set_queueId(queueId) {
-            this.queueId = queueId
+        set_queueId1(queueId1) {
+            this.queueId1 = queueId1
+        },
+        set_queueId2(queueId2) {
+            this.queueId2 = queueId2
+        },
+        set_queueId3(queueId3) {
+            this.queueId3 = queueId3
+        },
+        set_queueId4(queueId4) {
+            this.queueId4 = queueId4
         },
         set_lang(lang){
             this.lang = lang
@@ -71,6 +99,9 @@ export const useStateStore = defineStore('store', {
         },
         set_message(message){
             this.message = message;
+        },
+        set_request_body(request_body){
+            this.request_body = request_body
         }
     },
   })

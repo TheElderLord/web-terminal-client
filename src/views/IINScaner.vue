@@ -90,15 +90,15 @@ export default {
 </script>
 
 <template>
-    <div>
-        <div class="title text-center p-4">
+    <div class="w-full h-full">
+        <div class="title ">
             {{ getLang() == 'kz' ? 'Жеке куәліктің артқы жағындағы штрих-кодты сканерлеңіз' : getLang() == 'ru' ?
                 'Сканируйте штрих-код на обратной стороне удостоверения личности' :
                 'Back' }}
         </div>
         <div class="body ">
             <div class="form ">
-
+                <div>
                 <div class="form-container ">
                     <div class="iin-input">
                         <input v-model="IIN" id="scannerInput" :placeholder="getLang() == 'kz' ? 'Штрих-кодты сканерлеңіз' : getLang() == 'ru' ? 'Отсканируйте штрих-код' :
@@ -125,7 +125,7 @@ export default {
 
 
 
-                <div class="footer text-black text-center p-4 ">
+                <div class="body-footer text-black text-center p-4 ">
                     <p class="font-bold">{{ getLang() === "kz" ? `"Растау" батырмасын басу арқылы мен жинауға
                         келісімімді беремін,
                         өңдеу
@@ -134,25 +134,25 @@ export default {
                         обработку
                         моих персональных данных с целью получения консультации по его услугам`}}</p>
                 </div>
-
+            </div >
             </div>
             <div class="image w-full h-full">
-                <img src="../assets/icons/id_card.png" alt="">
+                <img src="../assets/icon/id.png" alt="" >
             </div>
         </div>
-        <div class="footer flex justify-around">
+        <div class="footer flex justify-around ">
             <div @click="goMain()" class="backButton w-1/3 text-center cursor-pointer">
 
                 <div class="text">
-                    <i class="bi bi-arrow-return-left text-3xl text-blue-600"></i>
+                    <i class="bi bi-arrow-return-left text-5xl text-blue-600"></i>
                     На главную
                 </div>
             </div>
-            <div class="arrowDown w-1/3 text-center">
+            <div class="arrowDown w-1/3  text-center">
                 <div class="text">
                     Сканер штрих-кода
                 </div>
-                <i class="bi bi-chevron-down font-bold text-5xl text-blue-600"></i>
+                <i class="bi bi-chevron-down font-bold  text-blue-600"></i>
 
             </div>
             <div @click="manualIInPage()"
@@ -166,20 +166,32 @@ export default {
 <style lang="scss" scoped>
 .title {
     color: #00BB00;
-    font-size: 32px;
+    font-size: 43px;
     font-weight: 700;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .body {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 60%;
+
+    .footer {
+        color: #00BB00;
+    }
 
     .form {
         width: 100%;
         height: 100%;
-
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
 
         .form-container {
@@ -190,6 +202,7 @@ export default {
             .iin-input {
                 input {
                     width: 24rem;
+                    font-size: 32px;
                     height: 100%;
                     margin: 0 auto;
                     border: 1px solid black;
@@ -220,32 +233,48 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        img{
+            width: 80%;
+            margin-bottom: 3rem;
+        }
     }
 }
 
 .footer {
+    width: 100%;
+    height: 100px;
     color: #00BB00;
+    position: absolute;
+    top: 85%;
 
     .backButton {
         .text {
-            font-size: 25px;
+            font-size: 40px;
             font-weight: 700;
+        }
+
+        i {
+            font-size: 60px;
         }
 
     }
 
     .arrowDown {
         .text {
-            font-size: 32px;
+            font-size: 42px;
             font-weight: 700;
+        }
+
+        i {
+            font-size: 100px;
         }
 
     }
 
     .manual {
-
+        display: flex;
         color: white;
-        font-size: 18px;
+        font-size: 36px;
         font-weight: 500;
         background-color: #00BB00;
     }

@@ -25,6 +25,10 @@ import Slide from '../views/Slide.vue';
 import ChangerLang from '../views/ChangerLang.vue';
 
 
+import TicketType from '../views/TicketType.vue';
+import QRTicket from '../views/QRTicket.vue';
+
+
 
 
 // const iin_req = import.meta.env.VITE_SERVER_INN_REQUIRED;
@@ -41,7 +45,6 @@ const router = createRouter({
       name:'lang',
       component: ChangerLang,
     
-     
     },
     {
       path: '/index',
@@ -144,6 +147,20 @@ const router = createRouter({
       path: '/slide',
       name: 'Slide',
       component: Slide,
+      props: true
+
+    },
+    {
+      path: '/ticket-type',
+      name: 'Ticket type',
+      component: TicketType,
+      props: true
+
+    },
+    {
+      path: '/qr-ticket',
+      name: 'QR',
+      component: QRTicket,
       props: true
 
     },

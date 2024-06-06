@@ -79,7 +79,7 @@ export default {
           try {
             const branchId = BRANCH_ID
             const queueId = service.queueId[0]
-            const iin =  '?'
+            const iin =  this.stateStore.get_iin ?? "?"
             const local = this.getLang()
             const requestBody = {
               branchId: branchId,

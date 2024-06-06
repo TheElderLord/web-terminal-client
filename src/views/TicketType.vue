@@ -1,7 +1,7 @@
 <script>
 import { useStateStore } from '../store'
 import axios from 'axios';
-import { SERVER_HOST,SERVER_PORT } from '../constants'
+import { SERVER_HOST, SERVER_PORT } from '../constants'
 
 
 export default {
@@ -25,13 +25,27 @@ export default {
         },
         goPrint() {
             this.sendEvent()
+            this.print()
             this.$router.push('/print')
+        },
+        async print() {
+            try {
+                const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/print`, {
+                    local: this.getlang(),
+                    // local: 'ru',
+                    soapBody: this.stateStore.get_ticket_body,
+                })
+                if (response.status === 200) this.$router.push('/print')
+            } catch (err) {
+                console.log(err)
+            }
         },
         goBack() {
             window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
         },
         async sendEvent() {
             const requestBody = this.stateStore.get_request_body;
+            console.log(requestBody)
             requestBody.channel = "terminal"
             const response = await axios.post(
                 `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,

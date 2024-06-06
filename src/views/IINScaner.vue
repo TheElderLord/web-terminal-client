@@ -61,7 +61,7 @@ export default {
                     return
                 }
                 this.error = true
-                this.setIIN
+                this.stateStore.set_iin(this.IIN)
                 this.$router.push('/index2')
             } catch (err) {
                 console.log(err)
@@ -145,19 +145,23 @@ export default {
 
                 <div class="text">
                     <i class="bi bi-arrow-return-left text-5xl text-blue-600"></i>
-                    На главную
+                    {{ getLang() == 'kz' ? 'Басты бетке' : getLang() == 'ru' ? ' На главную' :
+                    'Back' }}
                 </div>
             </div>
             <div class="arrowDown w-1/3  text-center">
                 <div class="text">
-                    Сканер штрих-кода
+                    
+                    {{ getLang() == 'kz' ? 'Штрих-кодты сканерлеу' : getLang() == 'ru' ? 'Сканер штрих-кода' :
+                    'Back' }}
                 </div>
                 <i class="bi bi-chevron-down font-bold  text-blue-600"></i>
 
             </div>
             <div @click="manualIInPage()"
                 class="manual w-1/3 text-center flex justify-center items-center cursor-pointer">
-                Ручной ввод ИИН
+                {{ getLang() == 'kz' ? 'Қолмен ЖСН-ді теру' : getLang() == 'ru' ? 'Ручной ввод ИИН' :
+                'Back' }}
             </div>
         </div>
     </div>

@@ -53,7 +53,7 @@ export default {
                 const ordernum = ticketBody['cus:ordernum'][0];
                 const proposal = ticketBody['cus:proposaltime'][0];
                 const time = new Date().toLocaleString();
-                qrURL += `?servicename=${serviceName}&time=${time}&number=${ticketNumber}&waittime=${proposal}&order=${ordernum}&lang=kz`;
+                qrURL += `?servicename=${serviceName}&time=${time}&number=${ticketNumber}&waittime=${proposal}&order=${ordernum}&lang=${this.stateStore.get_lang}`;
 
                 const canvas = this.$refs.canvas;
 

@@ -148,7 +148,7 @@
         <div v-if="service.cssclass[0]!=='' &&  service.cssclass[0]!=='mbutton'" class="icon">
 
         </div>
-        <div class="text-center serviceName">{{ getFormatService(service.workName[0]) }}</div>
+        <div :style="{ width: service.cssclass[0] !== '' && service.cssclass[0] !== 'mbutton' ? '70%' : '100%' }" class="text-center serviceName">{{ getFormatService(service.workName[0]) }}</div>
       </div>
       <!-- <div class="service accounts text-white text-xl  rounded-lg flex  basis-5/12  m-2">
         <div class="icon">
@@ -201,10 +201,11 @@
   .icon {
     width: 30%;
     height: 100%;
+    margin-right: .5rem;
   }
 
   .serviceName {
-    width: 100%;
+    
     height: 100%;
     display: flex;
     font-size: 43px;

@@ -148,7 +148,7 @@ export default {
         <div v-if="service.cssclass[0] !== '' && service.cssclass[0] !== 'mbutton'" class="icon">
         </div>
 
-        <div class="text-center">{{ getFormatService(service.workName[0]) }}</div>
+        <div :style="{ width: service.cssclass[0] !== '' && service.cssclass[0] !== 'mbutton' ? '70%' : '100%' }" class="text-center">{{ getFormatService(service.workName[0]) }}</div>
       </div>
 
 

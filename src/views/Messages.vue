@@ -66,14 +66,14 @@ export default {
   <main class="w-4/5 mx-auto">
     <div class="container mx-auto w-full h-64 mt-10">
       <div class="flex justify-center"><img src="../assets/warning.png" alt="" /></div>
-      <div class="textBlock text-white text-3xl text-center py-5 mt-3">
+      <div class="textBlock  text-5xl text-center py-10 mt-3">
         {{ formatted(getMessage()) }}
       </div>
       <!-- <div class="textBlock text-white text-3xl text-center py-5 ">dasfasdasdas</div> -->
     </div>
     <div class="buttonDiv">
       <div
-        class="rate text-white 0 py-5 mx-auto rounded-xl text-xl font-bold mt-15 text-center"
+        class="rate text-white  py-5 mx-auto rounded-xl text-5xl font-bold mt-15 text-center"
         @click="goBack()"
       >
         {{ getLang() === 'kz' ? 'Басты бет' : getLang() === 'ru' ? 'На главную' : 'To main page' }}

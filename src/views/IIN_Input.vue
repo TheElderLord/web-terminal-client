@@ -185,7 +185,7 @@ export default {
 }
 </script>
 <template>
-  <div class="md:container md:mx-auto p-3">
+  <div class=" h-full w-full mx-auto p-3">
     <div class="numpad text-center w-3/5 md:mx-auto bg-white bg-opacity-20 rounded-lg p-3">
       <div class="numpadHeader text-center m-3">
         <h1 class="text-black text-2xl m-3">
@@ -272,10 +272,19 @@ export default {
         </div>
       </div>
     </div>
-
+    <p class="font-bold text-center text-3xl">{{ getLang() === "kz" ? `"ОК" батырмасын басу арқылы мен жинауға
+      келісімімді беремін,
+      өңдеу
+      оның қызметтері бойынша кеңес алу мақсатында менің дербес деректерім` : `Нажимая кнопку
+      "ОК", я даю свое согласие на сбор,
+      обработку
+      моих персональных данных с целью получения консультации по его услугам`}}</p>
     <div class="md:container md:mx-auto text-white mt-3 flex justify-center">
 
-      <button @click="goBack()" class="keys p-4 rounded-lg text-xl font-bold">Назад</button>
+      <button @click="goBack()" class="keys p-4 rounded-lg text-3xl font-bold">Назад</button>
+
+
+      
       <!-- <div class="keys flex items-center justify-center m-4">
                 <div @click="inputFocus()" class="text-center    text-xl p-5 rounded-lg">{{ getLang() === "kz" ? "ЖСН сканерлеу" : getLang() ===
                     "ru"

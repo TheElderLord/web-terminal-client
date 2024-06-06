@@ -36,7 +36,7 @@ export default {
             return this.stateStore.get_iin
         },
 
-        goToSevicesPage(lang){
+        goToSevicesPage(lang) {
             this.stateStore.set_lang(lang);
             this.$router.push('/index')
         }
@@ -44,55 +44,61 @@ export default {
 
 
     mounted() {
-        
+
 
     },
 
 }
 </script>
 <template>
-    <div class="md:container mx-auto">
-        <div class="title text-center">
-            <h1>Bereke Bank-ке қош келдіңіз  <br>
-                Добро пожаловать в Bereke Bank</h1>
+    <div class=" h-full w-full mx-auto flex ">
+        <div class="logo w-full h-full flex justify-center items-center">
+            <img src="../assets/logo.png" alt="">
         </div>
-        <div class="services  mt-24">
-
-            <div @click="goToSevicesPage('kz')" class="service text-white   rounded-lg flex items-center justify-center ">
-                <div class="text-center">
-                    Қазақша
+        <div class="langCont w-full h-full flex justify-center items-center">
+            <div class="services ">
+                <div @click="goToSevicesPage('kz')"
+                    class="service text-white   rounded-lg flex items-center justify-center ">
+                    <div class="langIcon"><img src="../assets/kaz.png" alt=""></div>
+                    <div class="text-center">
+                        Қазақша
+                    </div>
+                </div>
+                <div @click="goToSevicesPage('en')"
+                    class="service text-white   rounded-lg flex items-center justify-center ">
+                    <div class="langIcon"><img src="../assets/eng.png" alt=""></div>
+                    <div class="text-center">
+                        Қазақша
+                    </div>
+                </div>
+                <div @click="goToSevicesPage('ru')"
+                    class="service text-white   rounded-lg flex items-center justify-center ">
+                    <div class="langIcon"><img src="../assets/ru.png" alt=""></div>
+                    <div class="text-center">
+                        Русский
+                    </div>
                 </div>
             </div>
-            <div @click="goToSevicesPage('ru')" class="service text-white   rounded-lg flex items-center justify-center ">
-                <div class="text-center">
-                   Русский
-                </div>
-            </div>
-            
-
-            <!-- <div 
-                class="service text-white text-xl  bg-yellow-600  rounded-lg flex items-center justify-center basis-5/12 py-4 m-2">
-                <div class="text-center">{{ getLang() === "kz" ? "Kazakh" : getLang() === "ru" ? "Russia" :"England" }}</div>
-            </div> -->
         </div>
-        
+
     </div>
 </template>
 <style lang="scss" scoped>
-.title{
-    h1{
+.title {
+    h1 {
         font-size: 65px;
     }
 }
+
 .service {
-    width: 50%;
+
     cursor: pointer;
     padding: 1rem;
-    background-color: #00BB00;
+    background-color: #005C54;
+    ;
     font-size: 75px;
     margin: 1rem auto;
 
-   
-}
 
+}
 </style>

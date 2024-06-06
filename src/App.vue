@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onBeforeMount, watch } from 'vue';
-import Header from './components/Header.vue';
+// import Header from './components/Header.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import IIN_Input from './views/IIN_Input.vue';
@@ -49,9 +49,7 @@ onBeforeMount(() => {
 
 <template>
   <div class="">
-    <div class="header">
-      <Header />
-    </div>
+   
     <div class="rout">
       <RouterView />
     </div>
@@ -66,14 +64,11 @@ onBeforeMount(() => {
   margin: 0;
 }
 
-.header {
-  width: 100vw;
-  height: 20vh;
-}
+
 
 .rout {
-  width: 100vw;
-  height: 80vh;
+  width: 100%;
+  height: 100vh;
 }
 
 /* Your styles go here */</style>

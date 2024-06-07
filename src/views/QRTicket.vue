@@ -3,7 +3,7 @@ import { useStateStore } from '../store'
 // import axios from 'axios';
 import QRCode from 'qrcode';
 import axios from 'axios';
-import { SERVER_HOST, SERVER_PORT, QR_URL,QR_IDLE } from '../constants'
+import { SERVER_HOST, SERVER_PORT, QR_URL,QR_IDLE, SHOW_RATING } from '../constants'
 export default {
     name: 'QRTicket',
     data() {
@@ -49,12 +49,15 @@ export default {
                 // const serviceName = "dsadas"
                 // const ordernum = 123123;
                 const ticketNumber = ticketBody['cus:ticketno'][0]
-                const serviceName = ticketBody['cus:servicename'][0]
+                const serviceName = ticketBody['cus:servicename'][0];
+                
                 const ordernum = ticketBody['cus:ordernum'][0];
                 const proposal = ticketBody['cus:proposaltime'][0];
                 const time = new Date().toLocaleString();
-                qrURL += `?servicename=${serviceName}&time=${time}&number=${ticketNumber}&waittime=${proposal}&order=${ordernum}&lang=${this.stateStore.get_lang}`;
-
+                qrURL += `?servicename=${serviceName}&time=${time}&number=${ticketNumber}&waittime=${proposal}&lang=${this.stateStore.get_lang}`;
+                if(SHOW_RATING === "true"){
+                    qrURL+= `&order=${ordernum}`;
+                }
                 const canvas = this.$refs.canvas;
 
                 const options = {

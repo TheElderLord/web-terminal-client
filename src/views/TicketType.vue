@@ -36,6 +36,7 @@ export default {
             const requestBody = this.stateStore.get_request_body;
             console.log(requestBody)
             requestBody.channel = "terminal"
+            
             const response = await axios.post(
                 `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
                 requestBody
@@ -58,7 +59,7 @@ export default {
             const currentPath = this.$route.path
 
             // Check if the route is '/rate'
-            if (currentPath === '/booking') {
+            if (currentPath === '/ticket-type') {
                 //   console.log('Line 92 redirect rate page');
                 this.goMain()
 

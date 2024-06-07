@@ -3,7 +3,7 @@ import { useStateStore } from '../store'
 // import axios from 'axios';
 import QRCode from 'qrcode';
 import axios from 'axios';
-import { SERVER_HOST, SERVER_PORT, QR_URL } from '../constants'
+import { SERVER_HOST, SERVER_PORT, QR_URL,QR_IDLE } from '../constants'
 export default {
     name: 'QRTicket',
     data() {
@@ -72,7 +72,25 @@ export default {
     },
     mounted() {
         this.sendEvent();
-    }
+        this.checkRouteInterval = setInterval(() => {
+            const currentPath = this.$route.path
+
+            // Check if the route is '/rate'
+            if (currentPath === '/qr-ticket') {
+                // console.log('Line 125 redirect index page')
+                this.goMain()
+
+                // Clear the interval if the condition is met
+                clearInterval(this.checkRouteInterval)
+            }
+        }, QR_IDLE)
+    },
+
+    beforeUnmount() {
+        // Clear the interval when the component is about to be unmounted
+        clearInterval(this.checkRouteInterval)
+    },
+
 }
 </script>
 <template>

@@ -1,7 +1,7 @@
 <script>
 import { useStateStore } from '../store'
 import axios from 'axios';
-import { SERVER_HOST, SERVER_PORT } from '../constants'
+import { SERVER_HOST, SERVER_PORT, SHOW_RATING } from '../constants'
 
 
 export default {
@@ -37,13 +37,19 @@ export default {
             console.log(requestBody)
             requestBody.channel = "terminal"
             
+            
             const response = await axios.post(
                 `http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/event-now`,
                 requestBody
             )
             console.log('Response', response)
             if (response.data.message == 'Success') {
-                this.stateStore.set_ticket_body(response.data.data)
+                let result = response.data.data;
+                if(SHOW_RATING==="false"){
+                    result['cus:ordernum'][0] = ""
+                    
+                }
+                this.stateStore.set_ticket_body(result)
                 console.log(this.stateStore.get_ticket_body)
                 // this.$router.push('/ticket-info')
             } else {

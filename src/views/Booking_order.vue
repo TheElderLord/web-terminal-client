@@ -135,9 +135,9 @@ export default {
           class="w-full h-24 rounded-md text-5xl text-center text-black"
           v-model="booking_code"
         />
-        <div v-if="error" class="error-text text-red-500 text-xl mt-4">
+        <!-- <div v-if="error" class="error-text text-red-500 text-xl mt-4">
           Дурыс емес броньдау коды
-        </div>
+        </div> -->
       </div>
       <div class="grid grid-cols-3 gap-5">
         <div class="keys h-20 py-6  rounded-lg text-2xl text-white" @click="addNum(1)">

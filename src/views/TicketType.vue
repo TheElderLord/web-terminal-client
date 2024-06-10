@@ -26,7 +26,7 @@ export default {
         goPrint() {
             this.sendEvent()
             // this.print()
-            this.$router.push('/print')
+            
         },
       
         goBack() {
@@ -51,6 +51,7 @@ export default {
                 }
                 this.stateStore.set_ticket_body(result)
                 console.log(this.stateStore.get_ticket_body)
+                this.$router.push('/print')
                 // this.$router.push('/ticket-info')
             } else {
                 console.error('Error in API response:', response.data.message)

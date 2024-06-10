@@ -24,12 +24,14 @@ export default {
     },
     async print() {
             try {
+                const ticketBody = this.stateStore.get_ticket_body
                 const response = await axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/v1/services/print`, {
                     local: this.stateStore.get_lang,
                     // local: 'ru',
-                    soapBody: this.stateStore.get_ticket_body,
+                    soapBody: ticketBody,
                 })
-                if (response.status === 200) this.$router.push('/print')
+                console.log(ticketBody)
+                // if (response.status === 200) this.$router.push('/print')
             } catch (err) {
                 console.log(err)
             }
